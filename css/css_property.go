@@ -11,26 +11,18 @@ type CssProperty struct {
 }
 
 // Properties
-func Color(value string) CssProperty {
-	property := CssProperty{propertyType: "color"}
-	property.propertyValues = make([]string, 0, 1)
-	property.propertyValues = append(property.propertyValues, value)
-
-	return property
-}
-
-func FontSizeEm(size uint32) CssProperty {
-	property := CssProperty{propertyType: "font-size"}
-	property.propertyValues = make([]string, 0, 1)
-	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vem", size))
-
-	return property
-}
-
 func BackgroundColor(value string) CssProperty {
 	property := CssProperty{propertyType: "background-color"}
 	property.propertyValues = make([]string, 0, 1)
 	property.propertyValues = append(property.propertyValues, value)
+
+	return property
+}
+
+func BackgroundImage(url string) CssProperty {
+	property := CssProperty{propertyType: "background-image"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("url(\"%v\")", url))
 
 	return property
 }
@@ -43,10 +35,26 @@ func BorderRadius(size uint32) CssProperty {
 	return property
 }
 
+func Color(value string) CssProperty {
+	property := CssProperty{propertyType: "color"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, value)
+
+	return property
+}
+
 func FontFamily(values ...string) CssProperty {
 	property := CssProperty{propertyType: "font-family"}
 	property.propertyValues = make([]string, 0, 1)
 	property.propertyValues = append(property.propertyValues, values...)
+
+	return property
+}
+
+func FontSizeEm(size uint32) CssProperty {
+	property := CssProperty{propertyType: "font-size"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vem", size))
 
 	return property
 }

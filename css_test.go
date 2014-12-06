@@ -17,6 +17,7 @@ func TestCss(t *testing.T) {
 		NewCssRule().For("#create-button").For("#update-button").Set(
 			BorderRadius(6),
 			FontFamily("PT Sans", "serif"),
+			BackgroundImage("/images/button.png"),
 		),
 	)
 
@@ -30,6 +31,7 @@ background-color: #000000;
 #create-button,#update-button {
 border-radius: 6px;
 font-family: PT Sans, serif;
+background-image: url("/images/button.png");
 }
 `
 
