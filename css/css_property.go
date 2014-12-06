@@ -27,6 +27,30 @@ func FontSizeEm(size uint32) CssProperty {
 	return property
 }
 
+func BackgroundColor(value string) CssProperty {
+	property := CssProperty{propertyType: "background-color"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, value)
+
+	return property
+}
+
+func BorderRadius(size uint32) CssProperty {
+	property := CssProperty{propertyType: "border-radius"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", size))
+
+	return property
+}
+
+func FontFamily(values ...string) CssProperty {
+	property := CssProperty{propertyType: "font-family"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, values...)
+
+	return property
+}
+
 // Modifiers
 func (property CssProperty) Important() CssProperty {
 	property.propertyValues = append(property.propertyValues, "!important")
@@ -40,6 +64,6 @@ func (property CssProperty) AddValue(value string) CssProperty {
 
 // Utils
 func (property CssProperty) String() string {
-	values := strings.Join(property.propertyValues, ",")
+	values := strings.Join(property.propertyValues, ", ")
 	return fmt.Sprintf("%v: %v;", property.propertyType, values)
 }

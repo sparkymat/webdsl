@@ -21,7 +21,7 @@ func (css Css) String() string {
 	return strings.Join(rulesStrings, "\n")
 }
 
-func (css Css) AddRule(rule CssRule) Css {
-	css.rules = append(css.rules, rule)
+func (css Css) Rules(rules ...CssRule) Css {
+	css.rules = append(css.rules, rules...)
 	return css
 }

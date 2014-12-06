@@ -8,12 +8,32 @@ import (
 )
 
 func TestCss(t *testing.T) {
-	css := NewCss("main").AddRule(
-		NewCssRule().For(".modal").
-			Set(FontSizeEm(4)),
+	css := NewCss("main").Rules(
+		NewCssRule().For(".modal").Set(
+			FontSizeEm(4),
+			Color("#ffffff"),
+			BackgroundColor("#000000"),
+		),
+		NewCssRule().For("#create-button").For("#update-button").Set(
+			BorderRadius(6),
+			FontFamily("PT Sans", "serif"),
+		),
 	)
 
-	if css.String() != ".modal {\nfont-size: 4em;\n}\n" {
+	expectedString :=
+		`.modal {
+font-size: 4em;
+color: #ffffff;
+background-color: #000000;
+}
+
+#create-button,#update-button {
+border-radius: 6px;
+font-family: PT Sans, serif;
+}
+`
+
+	if css.String() != expectedString {
 		fmt.Printf("%v", css.String())
 		t.Error("incorrect")
 	}

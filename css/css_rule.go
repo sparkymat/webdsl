@@ -23,8 +23,8 @@ func (rule CssRule) For(selector string) CssRule {
 	return rule
 }
 
-func (rule CssRule) Set(property CssProperty) CssRule {
-	rule.properties = append(rule.properties, property)
+func (rule CssRule) Set(properties ...CssProperty) CssRule {
+	rule.properties = append(rule.properties, properties...)
 	return rule
 }
 
