@@ -18,6 +18,17 @@ func TestCss(t *testing.T) {
 			BorderRadius(6),
 			FontFamily("PT Sans", "serif"),
 			BackgroundImage("/images/button.png"),
+			BackgroundRepeat(CssBackgroundRepeatX),
+		),
+		NewCssRule().For(".margin-rules").Set(
+			Margin1a(4),
+			Margin2a(6, 6),
+			Margin3a(8, 8, 8),
+			Margin4a(10, 10, 10, 10),
+			MarginLeft(2),
+			MarginRight(2),
+			MarginTop(2),
+			MarginBottom(2),
 		),
 	)
 
@@ -32,11 +43,24 @@ background-color: #000000;
 border-radius: 6px;
 font-family: PT Sans, serif;
 background-image: url("/images/button.png");
+background-repeat: repeat-x;
+}
+
+.margin-rules {
+margin: 4px;
+margin: 6px 6px;
+margin: 8px 8px 8px;
+margin: 10px 10px 10px 10px;
+margin-left: 2px;
+margin-right: 2px;
+margin-top: 2px;
+margin-bottom: 2px;
 }
 `
 
 	if css.String() != expectedString {
-		fmt.Printf("%v", css.String())
+		fmt.Printf("Expected:\n%v", expectedString)
+		fmt.Printf("Got:\n%v", css.String())
 		t.Error("incorrect")
 	}
 }
