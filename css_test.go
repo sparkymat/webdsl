@@ -8,19 +8,19 @@ import (
 )
 
 func TestCss(t *testing.T) {
-	css := NewCss("main").Rules(
-		NewCssRule().For(".modal").Set(
+	css := Css("main").Rules(
+		CssRules().For(".modal").Set(
 			FontSizeEm(4),
 			Color("#ffffff"),
 			BackgroundColor("#000000"),
 		),
-		NewCssRule().For("#create-button").For("#update-button").Set(
+		CssRules().For("#create-button").For("#update-button").Set(
 			BorderRadius(6),
 			FontFamily("PT Sans", "serif"),
 			BackgroundImage("/images/button.png"),
 			BackgroundRepeat(CssBackgroundRepeatX),
 		),
-		NewCssRule().For(".margin-rules").Set(
+		CssRules().For(".margin-rules").Set(
 			Margin1a(4),
 			Margin2a(6, 6),
 			Margin3a(8, 8, 8),

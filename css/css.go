@@ -2,18 +2,18 @@ package css
 
 import "strings"
 
-type Css struct {
+type CssContainer struct {
 	fileName string
-	rules    []CssRule
+	rules    []CssRuleSet
 }
 
-func NewCss(name string) Css {
-	css := Css{fileName: name}
-	css.rules = make([]CssRule, 0, 4)
+func Css(Css string) CssContainer {
+	css := CssContainer{fileName: Css}
+	css.rules = make([]CssRuleSet, 0, 4)
 	return css
 }
 
-func (css Css) String() string {
+func (css CssContainer) String() string {
 	rulesStrings := make([]string, 0, 1)
 	for _, rule := range css.rules {
 		rulesStrings = append(rulesStrings, rule.String())
@@ -21,7 +21,7 @@ func (css Css) String() string {
 	return strings.Join(rulesStrings, "\n")
 }
 
-func (css Css) Rules(rules ...CssRule) Css {
+func (css CssContainer) Rules(rules ...CssRuleSet) CssContainer {
 	css.rules = append(css.rules, rules...)
 	return css
 }

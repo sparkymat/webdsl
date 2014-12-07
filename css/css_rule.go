@@ -5,30 +5,30 @@ import (
 	"strings"
 )
 
-type CssRule struct {
+type CssRuleSet struct {
 	selectors  []string
 	properties []CssProperty
 }
 
-func NewCssRule() CssRule {
-	rule := CssRule{}
+func CssRules() CssRuleSet {
+	rule := CssRuleSet{}
 	rule.selectors = make([]string, 0, 2)
 	rule.properties = make([]CssProperty, 0, 4)
 
 	return rule
 }
 
-func (rule CssRule) For(selector string) CssRule {
+func (rule CssRuleSet) For(selector string) CssRuleSet {
 	rule.selectors = append(rule.selectors, selector)
 	return rule
 }
 
-func (rule CssRule) Set(properties ...CssProperty) CssRule {
+func (rule CssRuleSet) Set(properties ...CssProperty) CssRuleSet {
 	rule.properties = append(rule.properties, properties...)
 	return rule
 }
 
-func (rule CssRule) String() string {
+func (rule CssRuleSet) String() string {
 	selectors := strings.Join(rule.selectors, ",")
 	properties := make([]string, 0, 1)
 	for _, property := range rule.properties {
