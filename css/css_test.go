@@ -9,7 +9,7 @@ func TestCss(t *testing.T) {
 	css := Css("main").Rules(
 		CssRules().For(".modal").Set(
 			FontSizeEm(4),
-			Color("#ffffff"),
+			Color("#ffffff").Important(),
 			BackgroundColor("#000000"),
 		),
 		CssRules().For("#create-button").For("#update-button").Set(
@@ -43,7 +43,7 @@ func TestCss(t *testing.T) {
 	expectedString :=
 		`.modal {
 font-size: 4em;
-color: #ffffff;
+color: #ffffff !important;
 background-color: #000000;
 }
 
