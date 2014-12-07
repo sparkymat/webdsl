@@ -7,18 +7,18 @@ import (
 
 func TestCss(t *testing.T) {
 	css := Css("main").Rules(
-		CssRules().For(".modal").Set(
+		Rule().For(".modal").Set(
 			FontSizeEm(4),
 			Color("#ffffff").Important(),
 			BackgroundColor("#000000"),
 		),
-		CssRules().For("#create-button").For("#update-button").Set(
+		Rule().For("#create-button").For("#update-button").Set(
 			BorderRadius(6),
 			FontFamily("PT Sans", "serif"),
 			BackgroundImage("/images/button.png"),
 			BackgroundRepeat(CssBackgroundRepeatX),
 		),
-		CssRules().For(".margin-rules").Set(
+		Rule().For(".margin-rules").Set(
 			Margin1a(4),
 			Margin2a(6, 6),
 			Margin3a(8, 8, 8),
@@ -28,7 +28,7 @@ func TestCss(t *testing.T) {
 			MarginTop(2),
 			MarginBottom(2),
 		),
-		CssRules().For(".padding-rules").Set(
+		Rule().For(".padding-rules").Set(
 			Padding1a(2),
 			Padding2a(4, 4),
 			Padding3a(6, 6, 6),

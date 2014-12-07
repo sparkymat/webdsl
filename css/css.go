@@ -4,12 +4,12 @@ import "strings"
 
 type CssContainer struct {
 	fileName string
-	rules    []CssRuleSet
+	rules    []RuleSet
 }
 
 func Css(Css string) CssContainer {
 	css := CssContainer{fileName: Css}
-	css.rules = make([]CssRuleSet, 0, 4)
+	css.rules = make([]RuleSet, 0, 4)
 	return css
 }
 
@@ -21,7 +21,7 @@ func (css CssContainer) String() string {
 	return strings.Join(rulesStrings, "\n")
 }
 
-func (css CssContainer) Rules(rules ...CssRuleSet) CssContainer {
+func (css CssContainer) Rules(rules ...RuleSet) CssContainer {
 	css.rules = append(css.rules, rules...)
 	return css
 }
