@@ -7,7 +7,7 @@ DSL for generating HTML (TBD) and CSS.
 	  Css("main").Rules(
 	  	Rule().For(".modal").Set(
 	  		FontSizeEm(4),
-	  		Color("#ffffff"),
+	  		Color("#ffffff").Important(),
 	  		BackgroundColor("#000000"),
 	  	),
 	  	Rule().For("#create-button").For("#update-button").Set(
