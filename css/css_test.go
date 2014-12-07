@@ -1,10 +1,8 @@
-package main
+package css
 
 import (
 	"fmt"
 	"testing"
-
-	. "github.com/sparkymat/webdsl/css"
 )
 
 func TestCss(t *testing.T) {
