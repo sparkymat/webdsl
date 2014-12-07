@@ -7,13 +7,13 @@ import (
 
 type CssRuleSet struct {
 	selectors  []string
-	properties []CssProperty
+	properties []Property
 }
 
 func CssRules() CssRuleSet {
 	rule := CssRuleSet{}
 	rule.selectors = make([]string, 0, 2)
-	rule.properties = make([]CssProperty, 0, 4)
+	rule.properties = make([]Property, 0, 4)
 
 	return rule
 }
@@ -23,7 +23,7 @@ func (rule CssRuleSet) For(selector string) CssRuleSet {
 	return rule
 }
 
-func (rule CssRuleSet) Set(properties ...CssProperty) CssRuleSet {
+func (rule CssRuleSet) Set(properties ...Property) CssRuleSet {
 	rule.properties = append(rule.properties, properties...)
 	return rule
 }
