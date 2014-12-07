@@ -75,6 +75,70 @@ func FontSizeEm(size uint32) CssProperty {
 	return property
 }
 
+func Padding1a(top uint32) CssProperty {
+	property := CssProperty{propertyType: "padding"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", top))
+
+	return property
+}
+
+func Padding2a(top uint32, right uint32) CssProperty {
+	property := CssProperty{propertyType: "padding"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx %vpx", top, right))
+
+	return property
+}
+
+func Padding3a(top uint32, right uint32, bottom uint32) CssProperty {
+	property := CssProperty{propertyType: "padding"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx %vpx %vpx", top, right, bottom))
+
+	return property
+}
+
+func Padding4a(top uint32, right uint32, bottom uint32, left uint32) CssProperty {
+	property := CssProperty{propertyType: "padding"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx %vpx %vpx %vpx", top, right, bottom, left))
+
+	return property
+}
+
+func PaddingLeft(distance uint32) CssProperty {
+	property := CssProperty{propertyType: "padding-left"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
+func PaddingRight(distance uint32) CssProperty {
+	property := CssProperty{propertyType: "padding-right"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
+func PaddingTop(distance uint32) CssProperty {
+	property := CssProperty{propertyType: "padding-top"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
+func PaddingBottom(distance uint32) CssProperty {
+	property := CssProperty{propertyType: "padding-bottom"}
+	property.propertyValues = make([]string, 0, 1)
+	property.propertyValues = append(property.propertyValues, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
 func Margin1a(top uint32) CssProperty {
 	property := CssProperty{propertyType: "margin"}
 	property.propertyValues = make([]string, 0, 1)

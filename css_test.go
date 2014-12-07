@@ -30,6 +30,16 @@ func TestCss(t *testing.T) {
 			MarginTop(2),
 			MarginBottom(2),
 		),
+		CssRules().For(".padding-rules").Set(
+			Padding1a(2),
+			Padding2a(4, 4),
+			Padding3a(6, 6, 6),
+			Padding4a(8, 8, 8, 8),
+			PaddingLeft(2),
+			PaddingRight(2),
+			PaddingTop(2),
+			PaddingBottom(2),
+		),
 	)
 
 	expectedString :=
@@ -55,6 +65,17 @@ margin-left: 2px;
 margin-right: 2px;
 margin-top: 2px;
 margin-bottom: 2px;
+}
+
+.padding-rules {
+padding: 2px;
+padding: 4px 4px;
+padding: 6px 6px 6px;
+padding: 8px 8px 8px 8px;
+padding-left: 2px;
+padding-right: 2px;
+padding-top: 2px;
+padding-bottom: 2px;
 }
 `
 
