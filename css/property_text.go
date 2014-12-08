@@ -2,6 +2,36 @@ package css
 
 import "fmt"
 
+// Direction functions
+func DirectionLtr() Property {
+	property := Property{propertyType: "direction"}
+	property.values = append(property.values, "ltr")
+
+	return property
+}
+
+func DirectionRtl() Property {
+	property := Property{propertyType: "direction"}
+	property.values = append(property.values, "rtl")
+
+	return property
+}
+
+func DirectionInitial() Property {
+	property := Property{propertyType: "direction"}
+	property.values = append(property.values, "initial")
+
+	return property
+}
+
+func DirectionInherit() Property {
+	property := Property{propertyType: "direction"}
+	property.values = append(property.values, "inherit")
+
+	return property
+}
+
+// Color functions
 func Color3i(red uint32, green uint32, blue uint32) Property {
 	property := Property{propertyType: "color"}
 	property.values = append(property.values, fmt.Sprintf("rgb(%v, %v, %v)", red, green, blue))
@@ -19,6 +49,20 @@ func Color4a(red uint32, green uint32, blue uint32, alpha float32) Property {
 func Color(value string) Property {
 	property := Property{propertyType: "color"}
 	property.values = append(property.values, value)
+
+	return property
+}
+
+func ColorInherit() Property {
+	property := Property{propertyType: "color"}
+	property.values = append(property.values, "inherit")
+
+	return property
+}
+
+func ColorInitial() Property {
+	property := Property{propertyType: "color"}
+	property.values = append(property.values, "initial")
 
 	return property
 }
