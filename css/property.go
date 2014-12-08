@@ -68,28 +68,28 @@ func FontSizeEm(size uint32) Property {
 	return property
 }
 
-func Padding1a(top uint32) Property {
+func Padding1i(top uint32) Property {
 	property := Property{propertyType: "padding"}
 	property.values = append(property.values, fmt.Sprintf("%vpx", top))
 
 	return property
 }
 
-func Padding2a(top uint32, right uint32) Property {
+func Padding2i(top uint32, right uint32) Property {
 	property := Property{propertyType: "padding"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx", top, right))
 
 	return property
 }
 
-func Padding3a(top uint32, right uint32, bottom uint32) Property {
+func Padding3i(top uint32, right uint32, bottom uint32) Property {
 	property := Property{propertyType: "padding"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx", top, right, bottom))
 
 	return property
 }
 
-func Padding4a(top uint32, right uint32, bottom uint32, left uint32) Property {
+func Padding4i(top uint32, right uint32, bottom uint32, left uint32) Property {
 	property := Property{propertyType: "padding"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx %vpx", top, right, bottom, left))
 
@@ -124,28 +124,28 @@ func PaddingBottom(distance uint32) Property {
 	return property
 }
 
-func Margin1a(top uint32) Property {
+func Margin1i(top uint32) Property {
 	property := Property{propertyType: "margin"}
 	property.values = append(property.values, fmt.Sprintf("%vpx", top))
 
 	return property
 }
 
-func Margin2a(top uint32, right uint32) Property {
+func Margin2i(top uint32, right uint32) Property {
 	property := Property{propertyType: "margin"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx", top, right))
 
 	return property
 }
 
-func Margin3a(top uint32, right uint32, bottom uint32) Property {
+func Margin3i(top uint32, right uint32, bottom uint32) Property {
 	property := Property{propertyType: "margin"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx", top, right, bottom))
 
 	return property
 }
 
-func Margin4a(top uint32, right uint32, bottom uint32, left uint32) Property {
+func Margin4i(top uint32, right uint32, bottom uint32, left uint32) Property {
 	property := Property{propertyType: "margin"}
 	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx %vpx", top, right, bottom, left))
 
