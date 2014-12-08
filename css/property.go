@@ -47,13 +47,6 @@ func BorderRadius(size uint32) Property {
 	return property
 }
 
-func Color(value string) Property {
-	property := Property{propertyType: "color"}
-	property.values = append(property.values, value)
-
-	return property
-}
-
 func FontFamily(values ...string) Property {
 	property := Property{propertyType: "font-family"}
 	property.values = append(property.values, values...)
