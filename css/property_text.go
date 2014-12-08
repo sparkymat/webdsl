@@ -2,6 +2,35 @@ package css
 
 import "fmt"
 
+// Letter spacing
+func LetterSpacingNormal() Property {
+	property := Property{propertyType: "letter-spacing"}
+	property.values = append(property.values, "normal")
+
+	return property
+}
+
+func LetterSpacingInitial() Property {
+	property := Property{propertyType: "letter-spacing"}
+	property.values = append(property.values, "initial")
+
+	return property
+}
+
+func LetterSpacingInherit() Property {
+	property := Property{propertyType: "letter-spacing"}
+	property.values = append(property.values, "inherit")
+
+	return property
+}
+
+func LetterSpacing(distance int32) Property {
+	property := Property{propertyType: "letter-spacing"}
+	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
 // Direction functions
 func DirectionLtr() Property {
 	property := Property{propertyType: "direction"}

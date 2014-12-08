@@ -5,6 +5,32 @@ import (
 	"testing"
 )
 
+func TestLetterSpacing(t *testing.T) {
+	css := Css("main").Rules(
+		Rule().For(".text").Set(
+			LetterSpacingNormal(),
+			LetterSpacingInherit(),
+			LetterSpacingInitial(),
+			LetterSpacing(-2),
+		),
+	)
+
+	expectedString :=
+		`.text {
+letter-spacing: normal;
+letter-spacing: inherit;
+letter-spacing: initial;
+letter-spacing: -2px;
+}
+`
+
+	if css.String() != expectedString {
+		fmt.Printf("Expected:\n%v", expectedString)
+		fmt.Printf("Got:\n%v", css.String())
+		t.Error("String was not generated correctly")
+	}
+}
+
 func TestTextDirection(t *testing.T) {
 	css := Css("main").Rules(
 		Rule().For(".text").Set(
@@ -23,6 +49,7 @@ direction: inherit;
 direction: initial;
 }
 `
+
 	if css.String() != expectedString {
 		fmt.Printf("Expected:\n%v", expectedString)
 		fmt.Printf("Got:\n%v", css.String())
