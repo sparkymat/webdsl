@@ -11,15 +11,11 @@ type RuleSet struct {
 }
 
 func Rule() RuleSet {
-	rule := RuleSet{}
-	rule.selectors = make([]string, 0, 2)
-	rule.properties = make([]Property, 0, 4)
-
-	return rule
+	return RuleSet{}
 }
 
-func (rule RuleSet) For(selector string) RuleSet {
-	rule.selectors = append(rule.selectors, selector)
+func (rule RuleSet) For(selector Selector) RuleSet {
+	rule.selectors = append(rule.selectors, selector.Selector())
 	return rule
 }
 
