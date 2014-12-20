@@ -1,37 +1,38 @@
 package size
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/sparkymat/webdsl/types"
-)
+type unit string
+
+const px unit = "px"
+const em unit = "em"
+const percent unit = "%"
 
 type Size struct {
 	intValue   int64
 	floatValue float64
-	unit       string
-	valueType  types.Type
+	unit       unit
 }
 
 func Px(value int64) Size {
-	return Size{intValue: value, unit: "px", valueType: types.Int64}
+	return Size{intValue: value, unit: px}
 }
 
 func Percent(value int64) Size {
-	return Size{intValue: value, unit: "%", valueType: types.Int64}
+	return Size{intValue: value, unit: percent}
 }
 
 func Em(value float64) Size {
-	return Size{floatValue: value, unit: "em", valueType: types.Float64}
+	return Size{floatValue: value, unit: em}
 }
 
 func (size Size) String() string {
-	switch size.valueType {
-	case types.Int8, types.Int16, types.Int32, types.Int64, types.Uint8, types.Uint16, types.Uint32, types.Uint64:
+	switch size.unit {
+	case px, percent:
 		return fmt.Sprintf("%v%v", size.intValue, size.unit)
-	case types.Float32, types.Float64:
+	case em:
 		return fmt.Sprintf("%v%v", size.floatValue, size.unit)
 	default:
-		return fmt.Sprintf("%v%v", size.intValue, size.unit) // FIXME: Better way to handle defaut case?
+		panic("unsupported unit")
 	}
 }
