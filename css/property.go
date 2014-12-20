@@ -44,7 +44,7 @@ func BackgroundRepeat(value string) Property {
 
 func BorderRadius(size size.Size) Property {
 	property := Property{propertyType: "border-radius"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", size))
+	property.values = append(property.values, fmt.Sprintf("%v", size))
 
 	return property
 }
