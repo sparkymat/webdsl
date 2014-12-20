@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/kirillrdy/webdsl/css/size"
+	"github.com/sparkymat/webdsl/css/size"
 )
 
 func TestCss(t *testing.T) {

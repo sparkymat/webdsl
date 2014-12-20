@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/kirillrdy/webdsl/css/size"
+	"github.com/sparkymat/webdsl/css/size"
 )
 
 type Property struct {
