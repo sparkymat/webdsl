@@ -3,6 +3,8 @@ package css
 import (
 	"fmt"
 	"testing"
+
+	"github.com/sparkymat/webdsl/css/size"
 )
 
 func TestLetterSpacing(t *testing.T) {
@@ -11,7 +13,8 @@ func TestLetterSpacing(t *testing.T) {
 			LetterSpacingNormal(),
 			LetterSpacingInherit(),
 			LetterSpacingInitial(),
-			LetterSpacing(-2),
+			LetterSpacing(size.Px(12)),
+			LetterSpacing(size.Em(1.1)),
 		),
 	)
 
@@ -20,7 +23,8 @@ func TestLetterSpacing(t *testing.T) {
 letter-spacing: normal;
 letter-spacing: inherit;
 letter-spacing: initial;
-letter-spacing: -2px;
+letter-spacing: 12px;
+letter-spacing: 1.1em;
 }
 `
 

@@ -1,6 +1,10 @@
 package css
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/sparkymat/webdsl/css/size"
+)
 
 // Letter spacing
 func LetterSpacingNormal() Property {
@@ -24,9 +28,9 @@ func LetterSpacingInherit() Property {
 	return property
 }
 
-func LetterSpacing(distance int32) Property {
+func LetterSpacing(distance size.Size) Property {
 	property := Property{propertyType: "letter-spacing"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+	property.values = append(property.values, distance.String())
 
 	return property
 }
