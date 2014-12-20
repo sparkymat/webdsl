@@ -3,6 +3,8 @@ package css
 import (
 	"fmt"
 	"strings"
+
+	"github.com/kirillrdy/webdsl/css/size"
 )
 
 type Property struct {
@@ -40,7 +42,7 @@ func BackgroundRepeat(value string) Property {
 	return property
 }
 
-func BorderRadius(size uint32) Property {
+func BorderRadius(size size.Size) Property {
 	property := Property{propertyType: "border-radius"}
 	property.values = append(property.values, fmt.Sprintf("%vpx", size))
 
@@ -113,6 +115,20 @@ func PaddingTop(distance int32) Property {
 func PaddingBottom(distance int32) Property {
 	property := Property{propertyType: "padding-bottom"}
 	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+
+	return property
+}
+
+func Width(distance size.Size) Property {
+	property := Property{propertyType: "width"}
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
+
+	return property
+}
+
+func Height(distance size.Size) Property {
+	property := Property{propertyType: "height"}
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
 }
