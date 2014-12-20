@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
@@ -64,10 +65,8 @@ direction: initial;
 func TestTextColor(t *testing.T) {
 	css := Css("main").Rules(
 		Rule().For(Class("text")).Set(
-			Color3i(100, 100, 0),
-			Color4a(120, 120, 60, 0.5),
-			Color("#abcabc"),
-			Color("#monkeybarrels"), // FIXME: no validations!
+			Color(color.ColorRGB{Red: 100, Green: 100, Blue: 0}),
+			Color(color.ColorRGBA{Red: 120, Green: 120, Blue: 60, Alpha: 0.5}),
 			ColorInherit(),
 			ColorInitial(),
 			ColorAqua(),
@@ -94,8 +93,6 @@ func TestTextColor(t *testing.T) {
 		`.text {
 color: rgb(100, 100, 0);
 color: rgba(120, 120, 60, 0.50);
-color: #abcabc;
-color: #monkeybarrels;
 color: inherit;
 color: initial;
 color: aqua;

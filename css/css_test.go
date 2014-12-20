@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
@@ -11,8 +12,8 @@ func TestCss(t *testing.T) {
 	css := Css("main").Rules(
 		Rule().For(Class("modal")).Set(
 			FontSizeEm(4),
-			Color("#ffffff").Important(),
-			BackgroundColor("#000000"),
+			Color(color.ColorRGB{Red: 120, Green: 40, Blue: 10}).Important(),
+			BackgroundColor(color.ColorRGB{Red: 0, Green: 0, Blue: 0}),
 		),
 		Rule().For(Id("create-button")).For(Id("update-button")).Set(
 			BorderRadius(size.Px(6)),
@@ -45,8 +46,8 @@ func TestCss(t *testing.T) {
 	expectedString :=
 		`.modal {
 font-size: 4em;
-color: #ffffff !important;
-background-color: #000000;
+color: rgb(120, 40, 10) !important;
+background-color: rgb(0, 0, 0);
 }
 
 #create-button,#update-button {

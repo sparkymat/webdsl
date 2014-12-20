@@ -1,8 +1,7 @@
 package css
 
 import (
-	"fmt"
-
+	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
@@ -65,23 +64,9 @@ func DirectionInherit() Property {
 }
 
 // Color functions
-func Color3i(red uint32, green uint32, blue uint32) Property {
+func Color(value color.Color) Property {
 	property := Property{propertyType: "color"}
-	property.values = append(property.values, fmt.Sprintf("rgb(%v, %v, %v)", red, green, blue))
-
-	return property
-}
-
-func Color4a(red uint32, green uint32, blue uint32, alpha float32) Property {
-	property := Property{propertyType: "color"}
-	property.values = append(property.values, fmt.Sprintf("rgba(%v, %v, %v, %.2f)", red, green, blue, alpha))
-
-	return property
-}
-
-func Color(value string) Property {
-	property := Property{propertyType: "color"}
-	property.values = append(property.values, value)
+	property.values = append(property.values, value.ColorString())
 
 	return property
 }
