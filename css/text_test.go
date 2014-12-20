@@ -7,7 +7,7 @@ import (
 
 func TestLetterSpacing(t *testing.T) {
 	css := Css("main").Rules(
-		Rule().For(".text").Set(
+		Rule().For(Class("text")).Set(
 			LetterSpacingNormal(),
 			LetterSpacingInherit(),
 			LetterSpacingInitial(),
@@ -33,7 +33,7 @@ letter-spacing: -2px;
 
 func TestTextDirection(t *testing.T) {
 	css := Css("main").Rules(
-		Rule().For(".text").Set(
+		Rule().For(Class("text")).Set(
 			DirectionLtr(),
 			DirectionRtl(),
 			DirectionInherit(),
@@ -59,7 +59,7 @@ direction: initial;
 
 func TestTextColor(t *testing.T) {
 	css := Css("main").Rules(
-		Rule().For(".text").Set(
+		Rule().For(Class("text")).Set(
 			Color3i(100, 100, 0),
 			Color4a(120, 120, 60, 0.5),
 			Color("#abcabc"),

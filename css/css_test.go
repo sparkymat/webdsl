@@ -3,22 +3,24 @@ package css
 import (
 	"fmt"
 	"testing"
+
+	"github.com/kirillrdy/webdsl/css/size"
 )
 
 func TestCss(t *testing.T) {
 	css := Css("main").Rules(
-		Rule().For(".modal").Set(
+		Rule().For(Class("modal")).Set(
 			FontSizeEm(4),
 			Color("#ffffff").Important(),
 			BackgroundColor("#000000"),
 		),
-		Rule().For("#create-button").For("#update-button").Set(
-			BorderRadius(6),
+		Rule().For(Id("create-button")).For(Id("update-button")).Set(
+			BorderRadius(size.Px(6)),
 			FontFamily("PT Sans", "serif"),
 			BackgroundImage("/images/button.png"),
 			BackgroundRepeat(CssBackgroundRepeatX),
 		),
-		Rule().For(".margin-rules").Set(
+		Rule().For(Class("margin-rules")).Set(
 			Margin1i(-4),
 			Margin2i(6, -6),
 			Margin3i(8, -8, 8),
@@ -28,7 +30,7 @@ func TestCss(t *testing.T) {
 			MarginTop(-2),
 			MarginBottom(-2),
 		),
-		Rule().For(".padding-rules").Set(
+		Rule().For(Class("padding-rules")).Set(
 			Padding1i(-2),
 			Padding2i(4, -4),
 			Padding3i(6, -6, 6),
