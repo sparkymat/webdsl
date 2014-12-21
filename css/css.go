@@ -3,18 +3,15 @@ package css
 import "strings"
 
 type CssContainer struct {
-	fileName string
-	rules    []RuleSet
+	rules []RuleSet
 }
 
 func Css(Css string) CssContainer {
-	css := CssContainer{fileName: Css}
-	css.rules = make([]RuleSet, 0, 4)
-	return css
+	return CssContainer{}
 }
 
 func (css CssContainer) String() string {
-	rulesStrings := make([]string, 0, 1)
+	var rulesStrings []string
 	for _, rule := range css.rules {
 		rulesStrings = append(rulesStrings, rule.String())
 	}
