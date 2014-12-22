@@ -64,6 +64,13 @@ func FontSizeEm(size uint32) Property {
 	return property
 }
 
+func Padding(size size.Size) Property {
+	property := Property{propertyType: "padding"}
+	property.values = append(property.values, size.String())
+
+	return property
+}
+
 func Padding1i(top int32) Property {
 	property := Property{propertyType: "padding"}
 	property.values = append(property.values, fmt.Sprintf("%vpx", top))
@@ -130,6 +137,13 @@ func Width(distance size.Size) Property {
 func Height(distance size.Size) Property {
 	property := Property{propertyType: "height"}
 	property.values = append(property.values, fmt.Sprintf("%v", distance))
+
+	return property
+}
+
+func Margin(size size.Size) Property {
+	property := Property{propertyType: "margin"}
+	property.values = append(property.values, size.String())
 
 	return property
 }
