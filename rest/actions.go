@@ -1,6 +1,6 @@
 package rest
 
-import "github.com/sparkymat/webdsl/form/http"
+import "github.com/sparkymat/webdsl/http"
 
 type Action string
 
