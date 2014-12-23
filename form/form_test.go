@@ -1,6 +1,7 @@
 package form
 
 import (
+	"log"
 	"testing"
 
 	"github.com/sparkymat/webdsl/form/http"
@@ -16,6 +17,10 @@ type Car struct {
 func TestCreation(t *testing.T) {
 	c := Car{}
 	f := Form{action: rest.Create, value: c}
+
+	html, _ := f.Html()
+	str := html.String()
+	log.Print("generated = ", str)
 
 	resourceName, err := f.resourceName()
 
