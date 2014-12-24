@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
@@ -22,27 +21,6 @@ const CssBackgroundInitial = "initial"
 const CssBackgroundInherit = "inherit"
 
 // Properties
-func BackgroundColor(value color.Color) Property {
-	property := Property{propertyType: "background-color"}
-	property.values = append(property.values, value.ColorString())
-
-	return property
-}
-
-func BackgroundImage(url string) Property {
-	property := Property{propertyType: "background-image"}
-	property.values = append(property.values, fmt.Sprintf("url(\"%v\")", url))
-
-	return property
-}
-
-func BackgroundRepeat(value string) Property {
-	property := Property{propertyType: "background-repeat"}
-	property.values = append(property.values, value)
-
-	return property
-}
-
 func BorderRadius(size size.Size) Property {
 	property := Property{propertyType: "border-radius"}
 	property.values = append(property.values, fmt.Sprintf("%v", size))
