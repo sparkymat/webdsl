@@ -44,3 +44,14 @@ func AlignItems(value itemAlign) Property {
 
 	return property
 }
+
+type justifyContent string
+
+const FlexEnd justifyContent = "flex-end"
+
+func JustifyContent(value justifyContent) Property {
+	property := Property{propertyType: "justify-content"}
+	property.values = append(property.values, string(value))
+
+	return property
+}
