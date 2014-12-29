@@ -4,6 +4,7 @@ package css
 type Element string
 
 const Body Element = "body"
+const Head Element = "head"
 
 func (selector Element) Selector() string {
 	return string(selector)
