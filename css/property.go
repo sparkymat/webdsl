@@ -21,9 +21,16 @@ const CssBackgroundInitial = "initial"
 const CssBackgroundInherit = "inherit"
 
 // Properties
-func BorderRadius(size size.Size) Property {
+func BorderRadius(sizes ...size.Size) Property {
 	property := Property{propertyType: "border-radius"}
-	property.values = append(property.values, fmt.Sprintf("%v", size))
+
+	var values []string
+
+	for _, size := range sizes {
+		values = append(values, size.String())
+	}
+
+	property.values = append(property.values, fmt.Sprintf("%v", strings.Join(values, " ")))
 
 	return property
 }
@@ -154,30 +161,30 @@ func Margin4i(top int32, right int32, bottom int32, left int32) Property {
 	return property
 }
 
-func MarginLeft(distance int32) Property {
+func MarginLeft(distance size.Size) Property {
 	property := Property{propertyType: "margin-left"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
 }
 
-func MarginRight(distance int32) Property {
+func MarginRight(distance size.Size) Property {
 	property := Property{propertyType: "margin-right"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
 }
 
-func MarginTop(distance int32) Property {
+func MarginTop(distance size.Size) Property {
 	property := Property{propertyType: "margin-top"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
 }
 
-func MarginBottom(distance int32) Property {
+func MarginBottom(distance size.Size) Property {
 	property := Property{propertyType: "margin-bottom"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
 }

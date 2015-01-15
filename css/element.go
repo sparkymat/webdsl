@@ -5,6 +5,7 @@ type Element string
 
 const Body Element = "body"
 const Head Element = "head"
+const All Element = "*"
 
 func (selector Element) Selector() string {
 	return string(selector)
