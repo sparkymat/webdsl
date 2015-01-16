@@ -2,13 +2,13 @@ package css
 
 import "strings"
 
-type SelectorSet []Selector
+type SelectorChain []Selector
 
-func NestedSelector(selectors ...Selector) SelectorSet {
+func NestedSelector(selectors ...Selector) SelectorChain {
 	return selectors
 }
 
-func (set SelectorSet) Selector() string {
+func (set SelectorChain) Selector() string {
 	var selectors []string
 	for _, selector := range set {
 		selectors = append(selectors, selector.Selector())
@@ -17,6 +17,6 @@ func (set SelectorSet) Selector() string {
 	return strings.Join(selectors, " ")
 }
 
-func (set SelectorSet) Style(properties ...Property) RuleSet {
+func (set SelectorChain) Style(properties ...Property) RuleSet {
 	return Rule().For(set).Set(properties...)
 }

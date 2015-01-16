@@ -22,24 +22,18 @@ func TestCss(t *testing.T) {
 			BackgroundRepeat(CssBackgroundRepeatX),
 		),
 		Rule().For(Class("margin-rules")).Set(
-			Margin1i(-4),
-			Margin2i(6, -6),
-			Margin3i(8, -8, 8),
-			Margin4i(10, -10, 10, -10),
-			MarginLeft(-2),
-			MarginRight(-2),
-			MarginTop(-2),
-			MarginBottom(-2),
+			Margin(size.Px(8), size.Px(-8), size.Px(8)),
+			MarginLeft(size.Px(-2)),
+			MarginRight(size.Px(-2)),
+			MarginTop(size.Px(-2)),
+			MarginBottom(size.Px(-2)),
 		),
 		Rule().For(Class("padding-rules")).Set(
-			Padding1i(-2),
-			Padding2i(4, -4),
-			Padding3i(6, -6, 6),
-			Padding4i(8, -8, 8, -8),
-			PaddingLeft(-2),
-			PaddingRight(-2),
-			PaddingTop(-2),
-			PaddingBottom(-2),
+			Padding(size.Px(6), size.Px(-6), size.Px(6)),
+			PaddingLeft(size.Px(-2)),
+			PaddingRight(size.Px(-2)),
+			PaddingTop(size.Px(-2)),
+			PaddingBottom(size.Px(-2)),
 		),
 	)
 
@@ -58,10 +52,7 @@ background-repeat: repeat-x;
 }
 
 .margin-rules {
-margin: -4px;
-margin: 6px -6px;
 margin: 8px -8px 8px;
-margin: 10px -10px 10px -10px;
 margin-left: -2px;
 margin-right: -2px;
 margin-top: -2px;
@@ -69,10 +60,7 @@ margin-bottom: -2px;
 }
 
 .padding-rules {
-padding: -2px;
-padding: 4px -4px;
 padding: 6px -6px 6px;
-padding: 8px -8px 8px -8px;
 padding-left: -2px;
 padding-right: -2px;
 padding-top: -2px;

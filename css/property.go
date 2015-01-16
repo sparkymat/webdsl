@@ -20,6 +20,16 @@ const CssBackgroundNoRepeat = "no-repeat"
 const CssBackgroundInitial = "initial"
 const CssBackgroundInherit = "inherit"
 
+func (property Property) WithPropertyType(propertyType string) Property {
+	property.propertyType = propertyType
+	return property
+}
+
+func (property Property) WithValues(values ...string) Property {
+	property.values = values
+	return property
+}
+
 // Properties
 func BorderRadius(sizes ...size.Size) Property {
 	property := Property{propertyType: "border-radius"}
@@ -49,69 +59,6 @@ func FontSizeEm(size uint32) Property {
 	return property
 }
 
-func Padding(size size.Size) Property {
-	property := Property{propertyType: "padding"}
-	property.values = append(property.values, size.String())
-
-	return property
-}
-
-func Padding1i(top int32) Property {
-	property := Property{propertyType: "padding"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", top))
-
-	return property
-}
-
-func Padding2i(top int32, right int32) Property {
-	property := Property{propertyType: "padding"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx", top, right))
-
-	return property
-}
-
-func Padding3i(top int32, right int32, bottom int32) Property {
-	property := Property{propertyType: "padding"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx", top, right, bottom))
-
-	return property
-}
-
-func Padding4i(top int32, right int32, bottom int32, left int32) Property {
-	property := Property{propertyType: "padding"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx %vpx", top, right, bottom, left))
-
-	return property
-}
-
-func PaddingLeft(distance int32) Property {
-	property := Property{propertyType: "padding-left"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
-
-	return property
-}
-
-func PaddingRight(distance int32) Property {
-	property := Property{propertyType: "padding-right"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
-
-	return property
-}
-
-func PaddingTop(distance int32) Property {
-	property := Property{propertyType: "padding-top"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
-
-	return property
-}
-
-func PaddingBottom(distance int32) Property {
-	property := Property{propertyType: "padding-bottom"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", distance))
-
-	return property
-}
-
 func Width(distance size.Size) Property {
 	property := Property{propertyType: "width"}
 	property.values = append(property.values, fmt.Sprintf("%v", distance))
@@ -121,69 +68,6 @@ func Width(distance size.Size) Property {
 
 func Height(distance size.Size) Property {
 	property := Property{propertyType: "height"}
-	property.values = append(property.values, fmt.Sprintf("%v", distance))
-
-	return property
-}
-
-func Margin(size size.Size) Property {
-	property := Property{propertyType: "margin"}
-	property.values = append(property.values, size.String())
-
-	return property
-}
-
-func Margin1i(top int32) Property {
-	property := Property{propertyType: "margin"}
-	property.values = append(property.values, fmt.Sprintf("%vpx", top))
-
-	return property
-}
-
-func Margin2i(top int32, right int32) Property {
-	property := Property{propertyType: "margin"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx", top, right))
-
-	return property
-}
-
-func Margin3i(top int32, right int32, bottom int32) Property {
-	property := Property{propertyType: "margin"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx", top, right, bottom))
-
-	return property
-}
-
-func Margin4i(top int32, right int32, bottom int32, left int32) Property {
-	property := Property{propertyType: "margin"}
-	property.values = append(property.values, fmt.Sprintf("%vpx %vpx %vpx %vpx", top, right, bottom, left))
-
-	return property
-}
-
-func MarginLeft(distance size.Size) Property {
-	property := Property{propertyType: "margin-left"}
-	property.values = append(property.values, fmt.Sprintf("%v", distance))
-
-	return property
-}
-
-func MarginRight(distance size.Size) Property {
-	property := Property{propertyType: "margin-right"}
-	property.values = append(property.values, fmt.Sprintf("%v", distance))
-
-	return property
-}
-
-func MarginTop(distance size.Size) Property {
-	property := Property{propertyType: "margin-top"}
-	property.values = append(property.values, fmt.Sprintf("%v", distance))
-
-	return property
-}
-
-func MarginBottom(distance size.Size) Property {
-	property := Property{propertyType: "margin-bottom"}
 	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property
