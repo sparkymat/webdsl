@@ -1,0 +1,26 @@
+package list
+
+type StyleType string
+
+const Circle StyleType = "circle"
+const Disc StyleType = "disc"
+const Square StyleType = "square"
+const Armenian StyleType = "armenian"
+const CjkIdeographic StyleType = "cjk-ideographic"
+const Decimal StyleType = "decimal"
+const DecimalLeadingZero StyleType = "decimal-leading-zero"
+const Georgian StyleType = "georgian"
+const Hebrew StyleType = "hebrew"
+const Hiragana StyleType = "hiragana"
+const HiraganaIroha StyleType = "hiragana-iroha"
+const Katakana StyleType = "katakana"
+const KataganaIroha StyleType = "katagana-iroha"
+const LowerAlpha StyleType = "lower-alpha"
+const LowerGreek StyleType = "lower-greek"
+const LowerLatin StyleType = "lower-latin"
+const LowerRoman StyleType = "lower-roman"
+const UpperAlpha StyleType = "upper-alpha"
+const UpperLatin StyleType = "upper-latin"
+const UpperRoman StyleType = "upper-roman"
+const None StyleType = "none"
+const Inherit StyleType = "inherit"

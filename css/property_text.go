@@ -1,8 +1,11 @@
 package css
 
 import (
+	"fmt"
+
 	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
+	"github.com/sparkymat/webdsl/css/textdecoration"
 )
 
 // Letter spacing
@@ -67,6 +70,22 @@ func DirectionInherit() Property {
 func Color(value color.Color) Property {
 	property := Property{propertyType: "color"}
 	property.values = append(property.values, value.ColorString())
+
+	return property
+}
+
+// Text decoration
+func TextDecoration(value textdecoration.DecorationType) Property {
+	property := Property{propertyType: "text-decoration"}
+	property.values = append(property.values, string(value))
+
+	return property
+}
+
+// Text shadow
+func TextShadow(horizontal size.Size, vertical size.Size, blur size.Size, shadowColor color.Color) Property {
+	property := Property{propertyType: "text-shadow"}
+	property.values = append(property.values, fmt.Sprintf("%v %v %v %v", horizontal, vertical, blur, shadowColor))
 
 	return property
 }

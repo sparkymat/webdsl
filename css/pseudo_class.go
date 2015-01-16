@@ -6,6 +6,11 @@ const FirstChild PseudoClass = "first-child"
 const LastChild PseudoClass = "last-child"
 const After PseudoClass = "after"
 const Before PseudoClass = "before"
+const Hover PseudoClass = "hover"
+const Visited PseudoClass = "visited"
+const Active PseudoClass = "active"
+const Link PseudoClass = "link"
+const MozFocusRing PseudoClass = "-moz-focusring"
 
 type SelectorWithPseudoClass struct {
 	Element     Selector

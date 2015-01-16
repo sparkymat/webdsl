@@ -19,6 +19,7 @@ const Purple namedColor = "purple"
 const Red namedColor = "red"
 const Silver namedColor = "silver"
 const Teal namedColor = "teal"
+const Transparent namedColor = "transparent"
 const White namedColor = "white"
 const Yellow namedColor = "yellow"
 
