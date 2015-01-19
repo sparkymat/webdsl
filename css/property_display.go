@@ -1,14 +1,12 @@
 package css
 
-import "fmt"
+import (
+	"fmt"
 
-type displayType string
+	"github.com/sparkymat/webdsl/css/display"
+)
 
-//TODO Feel like display should be own package
-const Block displayType = "block"
-const Flex displayType = "flex"
-
-func Display(value displayType) Property {
+func Display(value display.Type) Property {
 	property := Property{propertyType: "display"}
 	property.values = append(property.values, string(value))
 

@@ -31,20 +31,6 @@ func (property Property) WithValues(values ...string) Property {
 }
 
 // Properties
-func BorderRadius(sizes ...size.Size) Property {
-	property := Property{propertyType: "border-radius"}
-
-	var values []string
-
-	for _, size := range sizes {
-		values = append(values, size.String())
-	}
-
-	property.values = append(property.values, fmt.Sprintf("%v", strings.Join(values, " ")))
-
-	return property
-}
-
 func FontFamily(values ...string) Property {
 	property := Property{propertyType: "font-family"}
 	property.values = append(property.values, values...)
@@ -68,6 +54,13 @@ func Width(distance size.Size) Property {
 
 func Height(distance size.Size) Property {
 	property := Property{propertyType: "height"}
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
+
+	return property
+}
+
+func MinHeight(distance size.Size) Property {
+	property := Property{propertyType: "min-height"}
 	property.values = append(property.values, fmt.Sprintf("%v", distance))
 
 	return property

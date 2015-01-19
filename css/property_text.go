@@ -6,6 +6,7 @@ import (
 	"github.com/sparkymat/webdsl/css/color"
 	"github.com/sparkymat/webdsl/css/size"
 	"github.com/sparkymat/webdsl/css/textdecoration"
+	"github.com/sparkymat/webdsl/css/textrendering"
 )
 
 // Letter spacing
@@ -86,6 +87,14 @@ func TextDecoration(value textdecoration.DecorationType) Property {
 func TextShadow(horizontal size.Size, vertical size.Size, blur size.Size, shadowColor color.Color) Property {
 	property := Property{propertyType: "text-shadow"}
 	property.values = append(property.values, fmt.Sprintf("%v %v %v %v", horizontal, vertical, blur, shadowColor))
+
+	return property
+}
+
+// Text rendering
+func TextRendering(value textrendering.Type) Property {
+	property := Property{propertyType: "text-rendering"}
+	property.values = append(property.values, string(value))
 
 	return property
 }

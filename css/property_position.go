@@ -3,18 +3,11 @@ package css
 import (
 	"fmt"
 
+	"github.com/sparkymat/webdsl/css/position"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
-type PositionType string
-
-const Absolute PositionType = "absolute"
-const Fixed PositionType = "fixed"
-const Relative PositionType = "relative"
-const PositionStatic PositionType = "static"
-const PositionInherit PositionType = "inherit"
-
-func Position(position PositionType) Property {
+func Position(position position.Type) Property {
 	property := Property{propertyType: "position"}
 	property.values = append(property.values, string(position))
 
