@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/sparkymat/webdsl/css/display"
+	"github.com/sparkymat/webdsl/css/flex"
 )
 
 func Display(value display.Type) Property {
@@ -13,13 +14,15 @@ func Display(value display.Type) Property {
 	return property
 }
 
-type flexDirection string
-
-const Column flexDirection = "column"
-const Row flexDirection = "row"
-
-func FlexDirection(value flexDirection) Property {
+func FlexDirection(value flex.Direction) Property {
 	property := Property{propertyType: "flex-direction"}
+	property.values = append(property.values, string(value))
+
+	return property
+}
+
+func FlexWrap(value flex.WrapType) Property {
+	property := Property{propertyType: "flex-wrap"}
 	property.values = append(property.values, string(value))
 
 	return property
@@ -32,9 +35,11 @@ func FlexGrow(value int) Property {
 	return property
 }
 
+//TODO this is used for flex box only. move this somewhere
 type itemAlign string
 
 const Center itemAlign = "center"
+const Stretch itemAlign = "stretch"
 
 func AlignItems(value itemAlign) Property {
 	property := Property{propertyType: "align-items"}
