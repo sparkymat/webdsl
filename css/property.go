@@ -66,6 +66,13 @@ func MinHeight(distance size.Size) Property {
 	return property
 }
 
+func MaxWidth(distance size.Size) Property {
+	property := Property{propertyType: "max-width"}
+	property.values = append(property.values, fmt.Sprintf("%v", distance))
+
+	return property
+}
+
 // Modifiers
 func (property Property) Important() Property {
 	property.isImportant = true
