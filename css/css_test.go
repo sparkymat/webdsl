@@ -9,7 +9,7 @@ import (
 )
 
 func TestCss(t *testing.T) {
-	css := Css("main").Rules(
+	css := Stylesheet(
 		Rule().For(Class("modal")).Set(
 			FontSizeEm(4),
 			Color(color.ColorRGB{Red: 120, Green: 40, Blue: 10}).Important(),
