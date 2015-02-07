@@ -4,7 +4,7 @@ import "strings"
 
 type SelectorChild []Selector
 
-func ChildSelector(selectors ...Selector) SelectorChain {
+func ChildSelector(selectors ...Selector) SelectorChild {
 	return selectors
 }
 
