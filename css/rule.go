@@ -25,7 +25,8 @@ func (rule RuleSet) Set(properties ...Property) RuleSet {
 }
 
 func (rule RuleSet) String() string {
-	selectors := strings.Join(rule.selectors, ",")
+
+	selectors := strings.Join(selectorsToStrings(rule.selectors), ",")
 	properties := make([]string, 0, 1)
 	for _, property := range rule.properties {
 		properties = append(properties, property.String())
