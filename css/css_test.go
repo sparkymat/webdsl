@@ -10,25 +10,25 @@ import (
 
 func TestCss(t *testing.T) {
 	css := Stylesheet(
-		Rule().For(Class("modal")).Set(
+		For(Class("modal")).Set(
 			FontSizeEm(4),
 			Color(color.ColorRGB{Red: 120, Green: 40, Blue: 10}).Important(),
 			BackgroundColor(color.ColorRGB{Red: 0, Green: 0, Blue: 0}),
 		),
-		Rule().For(Id("create-button")).For(Id("update-button")).Set(
+		For(Id("create-button"), Id("update-button")).Set(
 			BorderRadius(size.Px(6)),
 			FontFamily("PT Sans", "serif"),
 			BackgroundImage("/images/button.png"),
 			BackgroundRepeat(CssBackgroundRepeatX),
 		),
-		Rule().For(Class("margin-rules")).Set(
+		For(Class("margin-rules")).Set(
 			Margin(size.Px(8), size.Px(-8), size.Px(8)),
 			MarginLeft(size.Px(-2)),
 			MarginRight(size.Px(-2)),
 			MarginTop(size.Px(-2)),
 			MarginBottom(size.Px(-2)),
 		),
-		Rule().For(Class("padding-rules")).Set(
+		For(Class("padding-rules")).Set(
 			Padding(size.Px(6), size.Px(-6), size.Px(6)),
 			PaddingLeft(size.Px(-2)),
 			PaddingRight(size.Px(-2)),

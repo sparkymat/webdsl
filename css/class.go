@@ -11,5 +11,5 @@ func (class Class) WithPseudoClass(pseudoClass PseudoClass) SelectorWithPseudoCl
 }
 
 func (class Class) Style(properties ...Property) RuleSet {
-	return Rule().For(class).Set(properties...)
+	return For(class).Set(properties...)
 }

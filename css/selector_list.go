@@ -13,7 +13,7 @@ func (set SelectorList) Selector() string {
 }
 
 func (set SelectorList) Style(properties ...Property) RuleSet {
-	return Rule().For(set).Set(properties...)
+	return For(set).Set(properties...)
 }
 
 func (set SelectorList) Nest(selector Selector) SelectorList {

@@ -18,5 +18,5 @@ func (set SelectorChain) Selector() string {
 }
 
 func (set SelectorChain) Style(properties ...Property) RuleSet {
-	return Rule().For(set).Set(properties...)
+	return For(set).Set(properties...)
 }

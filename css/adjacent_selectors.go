@@ -13,5 +13,5 @@ func (adjacents AdjacentSelectors) Selector() string {
 }
 
 func (adjacents AdjacentSelectors) Style(properties ...Property) RuleSet {
-	return Rule().For(adjacents).Set(properties...)
+	return For(adjacents).Set(properties...)
 }
