@@ -35,10 +35,6 @@ func (card UserLoginCard) Html() html.Node {
 	)
 }
 
-func (card UserLoginCard) Type() ComponentType {
-	return FixedSize
-}
-
 func (card UserLoginCard) Width() size.Size {
 	return size.Px(640)
 }
