@@ -35,6 +35,13 @@ func FlexGrow(value int) Property {
 	return property
 }
 
+func FlexShrink(value int) Property {
+	property := Property{propertyType: "flex-shrink"}
+	property.values = append(property.values, fmt.Sprintf("%v", value))
+
+	return property
+}
+
 //TODO this is used for flex box only. move this somewhere
 type itemAlign string
 
