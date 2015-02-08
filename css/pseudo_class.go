@@ -22,5 +22,5 @@ func (selector SelectorWithPseudoClass) Selector() string {
 }
 
 func (selector SelectorWithPseudoClass) Style(properties ...Property) RuleSet {
-	return Rule().For(selector).Set(properties...)
+	return For(selector).Set(properties...)
 }

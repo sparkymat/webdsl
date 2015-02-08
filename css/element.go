@@ -14,7 +14,7 @@ func (selector Element) WithPseudoClass(pseudoClass PseudoClass) SelectorWithPse
 }
 
 func (selector Element) Style(properties ...Property) RuleSet {
-	return Rule().For(selector).Set(properties...)
+	return For(selector).Set(properties...)
 }
 
 func (selector Element) WithAttribute(value string) ElementWithAttribute {
@@ -30,5 +30,5 @@ func (selector ElementWithAttribute) WithPseudoClass(pseudoClass PseudoClass) Se
 }
 
 func (selector ElementWithAttribute) Style(properties ...Property) RuleSet {
-	return Rule().For(selector).Set(properties...)
+	return For(selector).Set(properties...)
 }

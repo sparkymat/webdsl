@@ -9,16 +9,11 @@ func AllSelectors(selectors ...Selector) SelectorList {
 }
 
 func (set SelectorList) Selector() string {
-	var selectors []string
-	for _, selector := range set {
-		selectors = append(selectors, selector.Selector())
-	}
-
-	return strings.Join(selectors, ", ")
+	return strings.Join(selectorsToStrings(set), ", ")
 }
 
 func (set SelectorList) Style(properties ...Property) RuleSet {
-	return Rule().For(set).Set(properties...)
+	return For(set).Set(properties...)
 }
 
 func (set SelectorList) Nest(selector Selector) SelectorList {

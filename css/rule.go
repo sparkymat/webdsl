@@ -6,17 +6,14 @@ import (
 )
 
 type RuleSet struct {
-	selectors  []string
+	selectors  []Selector
 	properties []Property
 }
 
-func Rule() RuleSet {
-	return RuleSet{}
-}
-
-func (rule RuleSet) For(selector Selector) RuleSet {
-	rule.selectors = append(rule.selectors, selector.Selector())
-	return rule
+func For(selectors ...Selector) RuleSet {
+	ruleset := RuleSet{}
+	ruleset.selectors = append(ruleset.selectors, selectors...)
+	return ruleset
 }
 
 func (rule RuleSet) Set(properties ...Property) RuleSet {
@@ -25,7 +22,8 @@ func (rule RuleSet) Set(properties ...Property) RuleSet {
 }
 
 func (rule RuleSet) String() string {
-	selectors := strings.Join(rule.selectors, ",")
+
+	selectors := strings.Join(selectorsToStrings(rule.selectors), ",")
 	properties := make([]string, 0, 1)
 	for _, property := range rule.properties {
 		properties = append(properties, property.String())
