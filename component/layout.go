@@ -23,14 +23,10 @@ func (layout LinearLayout) Html() html.Node {
 	return html.Div().Children(children...)
 }
 
-func (layout LinearLayout) Style() []css.RuleSet {
-	var rules []css.RuleSet
-
-	rules = append(rules,
-		css.Rule().For(LinearLayoutClass).Set(
+func (layout LinearLayout) Style() css.CssContainer {
+	return css.Stylesheet(
+		css.For(LinearLayoutClass).Set(
 			css.FlexDirection(flex.Column),
 		),
 	)
-
-	return rules
 }

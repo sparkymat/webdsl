@@ -14,15 +14,13 @@ type UserLoginCard struct {
 	Method http.Method
 }
 
-func (card UserLoginCard) Style() []css.RuleSet {
-	var rules []css.RuleSet
-
-	rules = append(rules, css.Rule().For(userLoginCardClass).Set(
-		css.Width(card.Width()),
-		css.Height(card.Height()),
-	))
-
-	return rules
+func (card UserLoginCard) Style() css.CssContainer {
+	return css.Stylesheet(
+		css.For(userLoginCardClass).Set(
+			css.Width(card.Width()),
+			css.Height(card.Height()),
+		),
+	)
 }
 
 func (card UserLoginCard) Html() html.Node {

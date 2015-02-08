@@ -7,7 +7,7 @@ import (
 )
 
 type Component interface {
-	Style() []css.RuleSet
+	Style() css.CssContainer
 	Html() html.Node
 
 	Width() size.Size

@@ -8,10 +8,12 @@ import (
 
 type Button html.Node
 
-func (button Button) Style() []css.RuleSet {
-	var rules []css.RuleSet
+const ButtonClass css.Class = "button"
 
-	return rules
+func (button Button) Style() css.CssContainer {
+	return css.Stylesheet(
+		css.For(ButtonClass).Set(),
+	)
 }
 
 func (button Button) Html() html.Node {
