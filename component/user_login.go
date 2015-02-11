@@ -7,24 +7,24 @@ import (
 	"github.com/sparkymat/webdsl/http"
 )
 
-const userLoginCardClass css.Class = "user-login-card"
+const userLoginViewClass css.Class = "user-login-card"
 
-type UserLoginCard struct {
+type UserLoginView struct {
 	Action string
 	Method http.Method
 }
 
-func (card UserLoginCard) Style() css.CssContainer {
+func (card UserLoginView) Style() css.CssContainer {
 	return css.Stylesheet(
-		css.For(userLoginCardClass).Set(
+		css.For(userLoginViewClass).Set(
 			css.Width(card.Width()),
 			css.Height(card.Height()),
 		),
 	)
 }
 
-func (card UserLoginCard) Html() html.Node {
-	return html.Div().Class(userLoginCardClass).Children(
+func (card UserLoginView) Html() html.Node {
+	return html.Div().Class(userLoginViewClass).Children(
 		html.Form().Action(card.Action).Method(string(card.Method)).Children(
 			html.Input().Name("email").Placeholder("E-mail").Type("email"),
 			html.Input().Name("password").Placeholder("Password").Type("password"),
@@ -33,10 +33,10 @@ func (card UserLoginCard) Html() html.Node {
 	)
 }
 
-func (card UserLoginCard) Width() size.Size {
+func (card UserLoginView) Width() size.Size {
 	return size.Px(640)
 }
 
-func (card UserLoginCard) Height() size.Size {
+func (card UserLoginView) Height() size.Size {
 	return size.Px(360)
 }

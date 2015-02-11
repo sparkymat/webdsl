@@ -6,7 +6,7 @@ import (
 	"github.com/sparkymat/webdsl/css/size"
 )
 
-type Component interface {
+type View interface {
 	Style() css.CssContainer
 	Html() html.Node
 

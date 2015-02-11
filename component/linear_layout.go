@@ -11,7 +11,7 @@ const LinearLayoutClass css.Class = "linear-layout"
 
 type LinearLayout struct {
 	Direction layout.Direction
-	Children  []Component
+	Children  []View
 }
 
 func (layout LinearLayout) Html() html.Node {
