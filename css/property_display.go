@@ -58,6 +58,7 @@ func AlignItems(value itemAlign) Property {
 type justifyContent string
 
 const FlexEnd justifyContent = "flex-end"
+const FlexStart justifyContent = "flex-start"
 
 func JustifyContent(value justifyContent) Property {
 	property := Property{propertyType: "justify-content"}
