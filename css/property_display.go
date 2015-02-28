@@ -55,13 +55,20 @@ func AlignItems(value itemAlign) Property {
 	return property
 }
 
-type justifyContent string
+type flexJustifyAndAlign string
 
-const FlexEnd justifyContent = "flex-end"
-const FlexStart justifyContent = "flex-start"
+const FlexEnd flexJustifyAndAlign = "flex-end"
+const FlexStart flexJustifyAndAlign = "flex-start"
 
-func JustifyContent(value justifyContent) Property {
+func JustifyContent(value flexJustifyAndAlign) Property {
 	property := Property{propertyType: "justify-content"}
+	property.values = append(property.values, string(value))
+
+	return property
+}
+
+func AlignContent(value flexJustifyAndAlign) Property {
+	property := Property{propertyType: "align-content"}
 	property.values = append(property.values, string(value))
 
 	return property
