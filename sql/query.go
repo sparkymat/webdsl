@@ -64,7 +64,7 @@ func (q Query) ToSQL() string {
 	selectedColumnStrings := []string{}
 
 	for _, selectedColumn := range q.SelectedFields {
-		selectedColumnStrings = append(selectedColumnStrings, fmt.Sprintf("  %v", selectedColumn.String()))
+		selectedColumnStrings = append(selectedColumnStrings, fmt.Sprintf("  %v", selectedColumn.SelectionString()))
 	}
 
 	joinStrings := []string{}
@@ -87,7 +87,7 @@ func (q Query) ToSQL() string {
 SELECT
 %v
 FROM %v %v
-WHERE %v %v %v;
+WHERE %v%v%v;
 `
 
 	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable, strings.Join(joinStrings, ""), q.WhereRelation.QueryFragment(), orderString, limitString)

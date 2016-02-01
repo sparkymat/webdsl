@@ -23,5 +23,5 @@ func (q ComplexRelation) And(rightQuery Relation) ComplexRelation {
 }
 
 func (q ComplexRelation) QueryFragment() string {
-	return fmt.Sprintf("(%v) %v (%v)", q.LeftQuery.QueryFragment(), q.Operation, q.RightQuery)
+	return fmt.Sprintf("(%v) %v (%v)", q.LeftQuery.QueryFragment(), q.Operation, q.RightQuery.QueryFragment())
 }
