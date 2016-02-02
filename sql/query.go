@@ -83,12 +83,16 @@ func (q Query) ToSQL() string {
 		limitString = fmt.Sprintf("\nLIMIT %v", *q.limit)
 	}
 
+	whereString := ""
+	if q.WhereRelation != nil {
+		whereString = fmt.Sprintf("\nWHERE %v", q.WhereRelation.QueryFragment())
+	}
+
 	sql := `
 SELECT
 %v
-FROM %v %v
-WHERE %v%v%v;
+FROM %v %v%v%v%v;
 `
 
-	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable, strings.Join(joinStrings, ""), q.WhereRelation.QueryFragment(), orderString, limitString)
+	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable, strings.Join(joinStrings, ""), whereString, orderString, limitString)
 }
