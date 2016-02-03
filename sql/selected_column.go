@@ -181,3 +181,12 @@ func (c SelectedColumn) InFloatArray(values []float64) SimpleRelation {
 	}
 	return SimpleRelation(fmt.Sprintf("%v IN (%v)", c.String(), strings.Join(transformedStrings, ", ")))
 }
+
+// Sorts
+func (c SelectedColumn) SortAscending() Order {
+	return Order{Column: c, Direction: Ascending}
+}
+
+func (c SelectedColumn) SortDescending() Order {
+	return Order{Column: c, Direction: Descending}
+}

@@ -10,7 +10,7 @@ type Query struct {
 	FromTable      table
 	Joins          []Join
 	WhereRelation  Relation
-	order          *Order
+	orders         []Order
 	limit          *int64
 }
 
@@ -56,9 +56,8 @@ func (q *Query) Limit(value int64) *Query {
 	return q
 }
 
-func (q *Query) Order(column SelectedColumn, direction Direction) *Query {
-	value := Order{Column: column, Direction: direction}
-	q.order = &value
+func (q *Query) Order(orders ...Order) *Query {
+	q.orders = orders
 	return q
 }
 
@@ -81,8 +80,12 @@ func (q Query) ToSQL() string {
 	}
 
 	orderString := ""
-	if q.order != nil {
-		orderString = fmt.Sprintf("\nORDER BY %v %v", q.order.Column.String(), q.order.Direction)
+	eachOrderStrings := []string{}
+	for _, eachOrder := range q.orders {
+		eachOrderStrings = append(eachOrderStrings, fmt.Sprintf("%v %v", eachOrder.Column.String(), eachOrder.Direction))
+	}
+	if len(eachOrderStrings) > 0 {
+		orderString = fmt.Sprintf("\nORDER BY %v", strings.Join(eachOrderStrings, ", "))
 	}
 
 	limitString := ""
