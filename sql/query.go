@@ -7,7 +7,7 @@ import (
 
 type Query struct {
 	SelectedFields []SelectedColumn
-	FromTable      Table
+	FromTable      table
 	Joins          []Join
 	WhereRelation  Relation
 	order          *Order
@@ -24,8 +24,8 @@ func Select(fields ...SelectedColumn) *Query {
 	return &query
 }
 
-func (q *Query) From(table Table) *Query {
-	q.FromTable = table
+func (q *Query) From(t table) *Query {
+	q.FromTable = t
 
 	return q
 }
@@ -39,6 +39,13 @@ func (q *Query) InnerJoin(leftColumn SelectedColumn, rightColumn SelectedColumn)
 
 func (q *Query) LeftJoin(leftColumn SelectedColumn, rightColumn SelectedColumn) *Query {
 	join := Join{Type: "LEFT JOIN", LeftColumn: leftColumn, RightColumn: rightColumn}
+	q.Joins = append(q.Joins, join)
+
+	return q
+}
+
+func (q *Query) LeftOuterJoin(leftColumn SelectedColumn, rightColumn SelectedColumn) *Query {
+	join := Join{Type: "LEFT OUTER JOIN", LeftColumn: leftColumn, RightColumn: rightColumn}
 	q.Joins = append(q.Joins, join)
 
 	return q
@@ -70,7 +77,7 @@ func (q Query) ToSQL() string {
 	joinStrings := []string{}
 
 	for _, join := range q.Joins {
-		joinStrings = append(joinStrings, fmt.Sprintf("\n%v %v ON %v = %v", join.Type, join.LeftColumn.Table, join.LeftColumn.String(), join.RightColumn.String()))
+		joinStrings = append(joinStrings, fmt.Sprintf("\n%v %v ON %v = %v", join.Type, join.LeftColumn.Table.Name(), join.LeftColumn.String(), join.RightColumn.String()))
 	}
 
 	orderString := ""
@@ -94,5 +101,5 @@ SELECT
 FROM %v %v%v%v%v;
 `
 
-	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable, strings.Join(joinStrings, ""), whereString, orderString, limitString)
+	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
 }

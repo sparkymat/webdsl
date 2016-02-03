@@ -6,7 +6,7 @@ import (
 )
 
 type SelectedColumn struct {
-	Table  Table
+	Table  table
 	Column string
 	alias  string
 }
@@ -17,7 +17,7 @@ func (c SelectedColumn) As(alias string) SelectedColumn {
 }
 
 func (c SelectedColumn) String() string {
-	return fmt.Sprintf("%v.%v", c.Table, c.Column)
+	return fmt.Sprintf("%v.%v", c.Table.Reference(), c.Column)
 }
 
 func (c SelectedColumn) SelectionString() string {
@@ -25,7 +25,7 @@ func (c SelectedColumn) SelectionString() string {
 		return c.String()
 	}
 
-	return fmt.Sprintf("%v.%v as %v", c.Table, c.Column, c.alias)
+	return fmt.Sprintf("%v as %v", c.String(), c.alias)
 }
 
 func (c SelectedColumn) IsNull() SimpleRelation {

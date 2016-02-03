@@ -1,11 +1,42 @@
 package sql
 
-type Table string
+import "fmt"
 
-func (t Table) AllColumns() SelectedColumn {
+type table struct {
+	name  string
+	alias string
+}
+
+func Table(name string) table {
+	return table{name: name}
+}
+
+func (t table) AllColumns() SelectedColumn {
 	return SelectedColumn{Table: t, Column: "*"}
 }
 
-func (t Table) Column(columnName string) SelectedColumn {
+func (t table) Column(columnName string) SelectedColumn {
 	return SelectedColumn{Table: t, Column: columnName}
+}
+
+func (t table) Name() string {
+	if t.alias != "" {
+		return fmt.Sprintf("%v %v", t.name, t.alias)
+	}
+
+	return t.name
+}
+
+func (t table) Reference() string {
+	if t.alias != "" {
+		return t.alias
+	}
+
+	return t.name
+}
+
+func (t table) Alias(alias string) table {
+	t.alias = alias
+
+	return t
 }
