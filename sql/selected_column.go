@@ -3,6 +3,7 @@ package sql
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 type SelectedColumn struct {
@@ -58,6 +59,10 @@ func (c SelectedColumn) EqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v = %v", c.String(), value))
 }
 
+func (c SelectedColumn) EqualsDate(value time.Time) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("DATE(%v) = %v", c.String(), value.Format("2006-01-02")))
+}
+
 // NOT EQUALS
 
 func (c SelectedColumn) NotEqualsPlaceholder() SimpleRelation {
@@ -82,6 +87,10 @@ func (c SelectedColumn) GreaterThanPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > ?", c.String()))
 }
 
+func (c SelectedColumn) GreaterThanString(value string) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v > '%v'", c.String(), value))
+}
+
 func (c SelectedColumn) GreaterThanInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > %v", c.String(), value))
 }
@@ -90,24 +99,40 @@ func (c SelectedColumn) GreaterThanFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > %v", c.String(), value))
 }
 
+func (c SelectedColumn) GreaterThanDate(value time.Time) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("DATE(%v) > '%v'", c.String(), value.Format("2006-01-02")))
+}
+
 // GREATER THAN OR EQUAL TO
 
-func (c SelectedColumn) GreaterThanOrEqualToPlaceholder() SimpleRelation {
+func (c SelectedColumn) GreaterThanOrEqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= ?", c.String()))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualToInteger(value int64) SimpleRelation {
+func (c SelectedColumn) GreaterThanOrEqualsString(value string) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v >= '%v'", c.String(), value))
+}
+
+func (c SelectedColumn) GreaterThanOrEqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= %v", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualToFloat(value float64) SimpleRelation {
+func (c SelectedColumn) GreaterThanOrEqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= %v", c.String(), value))
+}
+
+func (c SelectedColumn) GreaterThanOrEqualsDate(value time.Time) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("DATE(%v) >= '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // LESS THAN
 
 func (c SelectedColumn) LessThanPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < ?", c.String()))
+}
+
+func (c SelectedColumn) LessThanString(value string) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v < '%v'", c.String(), value))
 }
 
 func (c SelectedColumn) LessThanInteger(value int64) SimpleRelation {
@@ -118,18 +143,30 @@ func (c SelectedColumn) LessThanFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < %v", c.String(), value))
 }
 
+func (c SelectedColumn) LessThanDate(value time.Time) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("DATE(%v) < '%v'", c.String(), value.Format("2006-01-02")))
+}
+
 // LESS THAN OR EQUAL TO
 
-func (c SelectedColumn) LessThanOrEqualToPlaceholder() SimpleRelation {
+func (c SelectedColumn) LessThanOrEqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= ?", c.String()))
 }
 
-func (c SelectedColumn) LessThanOrEqualToInteger(value int64) SimpleRelation {
+func (c SelectedColumn) LessThanOrEqualsString(value string) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v <= '%v'", c.String(), value))
+}
+
+func (c SelectedColumn) LessThanOrEqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= %v", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanOrEqualToFloat(value float64) SimpleRelation {
+func (c SelectedColumn) LessThanOrEqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= %v", c.String(), value))
+}
+
+func (c SelectedColumn) LessThanOrEqualsDate(value time.Time) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("DATE(%v) <= '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // IN ARRAY

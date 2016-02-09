@@ -1,11 +1,13 @@
 package sql
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type ComplexRelation struct {
-	LeftQuery  Relation
-	Operation  Operation
-	RightQuery Relation
+	Relations []Relation
+	Operation Operation
 }
 
 type Operation string
@@ -13,15 +15,30 @@ type Operation string
 const Or Operation = "OR"
 const And Operation = "AND"
 
-func (q ComplexRelation) Or(rightQuery Relation) ComplexRelation {
-	return ComplexRelation{LeftQuery: q, Operation: Or, RightQuery: rightQuery}
+func (q ComplexRelation) Or(relation Relation) ComplexRelation {
+	if q.Operation == Or {
+		q.Relations = append(q.Relations, relation)
+		return q
+	}
 
+	return ComplexRelation{Operation: Or, Relations: []Relation{q, relation}}
 }
 
-func (q ComplexRelation) And(rightQuery Relation) ComplexRelation {
-	return ComplexRelation{LeftQuery: q, Operation: And, RightQuery: rightQuery}
+func (q ComplexRelation) And(relation Relation) ComplexRelation {
+	if q.Operation == And {
+		q.Relations = append(q.Relations, relation)
+		return q
+	}
+
+	return ComplexRelation{Operation: And, Relations: []Relation{q, relation}}
 }
 
 func (q ComplexRelation) QueryFragment() string {
-	return fmt.Sprintf("(%v) %v (%v)", q.LeftQuery.QueryFragment(), q.Operation, q.RightQuery.QueryFragment())
+	var formattedRelations []string
+
+	for _, relation := range q.Relations {
+		formattedRelations = append(formattedRelations, fmt.Sprintf("(%v)", relation.QueryFragment()))
+	}
+
+	return strings.Join(formattedRelations, fmt.Sprintf(" %v ", q.Operation))
 }

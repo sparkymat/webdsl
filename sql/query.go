@@ -12,6 +12,7 @@ type Query struct {
 	WhereRelation  Relation
 	orders         []Order
 	limit          *int64
+	count          *string
 }
 
 func Select(fields ...SelectedColumn) *Query {
@@ -22,6 +23,12 @@ func Select(fields ...SelectedColumn) *Query {
 	}
 
 	return &query
+}
+
+func (q *Query) Count() *Query {
+	count := "COUNT(*))"
+	q.count = &count
+	return q
 }
 
 func (q *Query) From(t table) *Query {
@@ -103,6 +110,10 @@ SELECT
 %v
 FROM %v %v%v%v%v;
 `
+
+	if q.count != nil {
+		return fmt.Sprintf(sql, q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+	}
 
 	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
 }

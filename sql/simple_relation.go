@@ -9,9 +9,17 @@ func (r SimpleRelation) QueryFragment() string {
 }
 
 func (r SimpleRelation) Or(rightQuery Relation) ComplexRelation {
-	return ComplexRelation{LeftQuery: r, Operation: Or, RightQuery: rightQuery}
+	if complexRightQuery, isComplex := rightQuery.(ComplexRelation); isComplex {
+		return complexRightQuery.Or(r)
+	}
+
+	return ComplexRelation{Operation: Or, Relations: []Relation{r, rightQuery}}
 }
 
 func (r SimpleRelation) And(rightQuery Relation) ComplexRelation {
-	return ComplexRelation{LeftQuery: r, Operation: And, RightQuery: rightQuery}
+	if complexRightQuery, isComplex := rightQuery.(ComplexRelation); isComplex {
+		return complexRightQuery.And(r)
+	}
+
+	return ComplexRelation{Operation: And, Relations: []Relation{r, rightQuery}}
 }
