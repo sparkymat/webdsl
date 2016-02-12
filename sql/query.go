@@ -26,7 +26,7 @@ func Select(fields ...SelectedColumn) *Query {
 }
 
 func (q *Query) Count() *Query {
-	count := "COUNT(*))"
+	count := "COUNT(*)"
 	q.count = &count
 	return q
 }
