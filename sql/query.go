@@ -112,7 +112,7 @@ FROM %v %v%v%v%v;
 `
 
 	if q.count != nil {
-		return fmt.Sprintf(sql, q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+		return fmt.Sprintf(sql, *q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
 	}
 
 	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
