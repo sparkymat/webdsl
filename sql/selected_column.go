@@ -227,3 +227,12 @@ func (c SelectedColumn) SortAscending() Order {
 func (c SelectedColumn) SortDescending() Order {
 	return Order{Column: c, Direction: Descending}
 }
+
+// Subquery
+func (c SelectedColumn) In(subQuery *Query) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v IN (%v)", c.String(), subQuery.ToSQLForSubQuery()))
+}
+
+func (c SelectedColumn) NotIn(subQuery *Query) SimpleRelation {
+	return SimpleRelation(fmt.Sprintf("%v NOT IN (%v)", c.String(), subQuery.ToSQLForSubQuery()))
+}

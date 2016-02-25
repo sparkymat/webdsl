@@ -73,7 +73,7 @@ func (q *Query) Where(relation Relation) *Query {
 	return q
 }
 
-func (q Query) ToSQL() string {
+func (q Query) ToSQLForSubQuery() string {
 	selectedColumnStrings := []string{}
 
 	for _, selectedColumn := range q.SelectedFields {
@@ -108,7 +108,7 @@ func (q Query) ToSQL() string {
 	sql := `
 SELECT
 %v
-FROM %v %v%v%v%v;
+FROM %v %v%v%v%v
 `
 
 	if q.count != nil {
@@ -116,4 +116,8 @@ FROM %v %v%v%v%v;
 	}
 
 	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+}
+
+func (q Query) ToSQL() string {
+	return fmt.Sprintf("%v;", q.ToSQLForSubQuery())
 }
