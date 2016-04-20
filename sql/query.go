@@ -11,6 +11,7 @@ type Query struct {
 	Joins          []Join
 	WhereRelation  Relation
 	orders         []Order
+	groups         []Column
 	limit          *int64
 	count          *string
 }
@@ -68,6 +69,11 @@ func (q *Query) Order(orders ...Order) *Query {
 	return q
 }
 
+func (q *Query) GroupBy(columns ...Column) *Query {
+	q.groups = columns
+	return q
+}
+
 func (q *Query) Where(relation Relation) *Query {
 	q.WhereRelation = relation
 	return q
@@ -95,6 +101,15 @@ func (q Query) ToSQLForSubQuery() string {
 		orderString = fmt.Sprintf("\nORDER BY %v", strings.Join(eachOrderStrings, ", "))
 	}
 
+	groupString := ""
+	eachGroupStrings := []string{}
+	for _, eachGroup := range q.groups {
+		eachGroupStrings = append(eachGroupStrings, eachGroup.String())
+	}
+	if len(eachGroupStrings) > 0 {
+		groupString = fmt.Sprintf("\nGROUP BY %v", strings.Join(eachGroupStrings, ", "))
+	}
+
 	limitString := ""
 	if q.limit != nil {
 		limitString = fmt.Sprintf("\nLIMIT %v", *q.limit)
@@ -108,14 +123,14 @@ func (q Query) ToSQLForSubQuery() string {
 	sql := `
 SELECT
 %v
-FROM %v %v%v%v%v
+FROM %v %v%v%v%v%v
 `
 
 	if q.count != nil {
-		return fmt.Sprintf(sql, *q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+		return fmt.Sprintf(sql, *q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, groupString, orderString, limitString)
 	}
 
-	return fmt.Sprintf(sql, strings.Join(selectedFieldStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+	return fmt.Sprintf(sql, strings.Join(selectedFieldStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, groupString, orderString, limitString)
 }
 
 func (q Query) ToSQL() string {

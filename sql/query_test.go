@@ -20,6 +20,7 @@ func TestQuery(t *testing.T) {
 				Where(accountStatus.Column("status").InStringArray([]string{"PENDING", "ACTIVE"})),
 		)).
 		Order(user.Column("name").SortAscending()).
+		GroupBy(user.Column("id")).
 		Limit(100)
 
 	expectedSQL := `
@@ -34,6 +35,7 @@ SELECT
 FROM account_status 
 WHERE account_status.status IN ('PENDING', 'ACTIVE')
 )
+GROUP BY user.id
 ORDER BY user.name ASC
 LIMIT 100
 ;`
