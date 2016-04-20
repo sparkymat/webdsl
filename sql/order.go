@@ -1,7 +1,7 @@
 package sql
 
 type Order struct {
-	Column    SelectedColumn
+	Column    Column
 	Direction Direction
 }
 

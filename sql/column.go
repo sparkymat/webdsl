@@ -6,22 +6,22 @@ import (
 	"time"
 )
 
-type SelectedColumn struct {
+type Column struct {
 	Table  table
 	Column string
 	alias  string
 }
 
-func (c SelectedColumn) As(alias string) SelectedColumn {
+func (c Column) As(alias string) Column {
 	c.alias = alias
 	return c
 }
 
-func (c SelectedColumn) String() string {
+func (c Column) String() string {
 	return fmt.Sprintf("%v.%v", c.Table.Reference(), c.Column)
 }
 
-func (c SelectedColumn) SelectionString() string {
+func (c Column) SelectionString() string {
 	if c.alias == "" {
 		return c.String()
 	}
@@ -29,149 +29,149 @@ func (c SelectedColumn) SelectionString() string {
 	return fmt.Sprintf("%v as %v", c.String(), c.alias)
 }
 
-func (c SelectedColumn) IsNull() SimpleRelation {
+func (c Column) IsNull() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v IS NULL", c.String()))
 }
 
-func (c SelectedColumn) IsNotNull() SimpleRelation {
+func (c Column) IsNotNull() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v IS NULL", c.String()))
 }
 
-func (c SelectedColumn) Like(pattern string) SimpleRelation {
+func (c Column) Like(pattern string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v LIKE '%v'", c.String(), pattern))
 }
 
 // EQUALS
 
-func (c SelectedColumn) EqualsPlaceholder() SimpleRelation {
+func (c Column) EqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v = ?", c.String()))
 }
 
-func (c SelectedColumn) EqualsString(value string) SimpleRelation {
+func (c Column) EqualsString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v = '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) EqualsInteger(value int64) SimpleRelation {
+func (c Column) EqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v = %v", c.String(), value))
 }
 
-func (c SelectedColumn) EqualsFloat(value float64) SimpleRelation {
+func (c Column) EqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v = %v", c.String(), value))
 }
 
-func (c SelectedColumn) EqualsDate(value time.Time) SimpleRelation {
+func (c Column) EqualsDate(value time.Time) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("DATE(%v) = %v", c.String(), value.Format("2006-01-02")))
 }
 
 // NOT EQUALS
 
-func (c SelectedColumn) NotEqualsPlaceholder() SimpleRelation {
+func (c Column) NotEqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v != ?", c.String()))
 }
 
-func (c SelectedColumn) NotEqualsString(value string) SimpleRelation {
+func (c Column) NotEqualsString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v != '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) NotEqualsInteger(value int64) SimpleRelation {
+func (c Column) NotEqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v != %v", c.String(), value))
 }
 
-func (c SelectedColumn) NotEqualsFloat(value float64) SimpleRelation {
+func (c Column) NotEqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v != %v", c.String(), value))
 }
 
 // GREATER THAN
 
-func (c SelectedColumn) GreaterThanPlaceholder() SimpleRelation {
+func (c Column) GreaterThanPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > ?", c.String()))
 }
 
-func (c SelectedColumn) GreaterThanString(value string) SimpleRelation {
+func (c Column) GreaterThanString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanInteger(value int64) SimpleRelation {
+func (c Column) GreaterThanInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > %v", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanFloat(value float64) SimpleRelation {
+func (c Column) GreaterThanFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v > %v", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanDate(value time.Time) SimpleRelation {
+func (c Column) GreaterThanDate(value time.Time) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("DATE(%v) > '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // GREATER THAN OR EQUAL TO
 
-func (c SelectedColumn) GreaterThanOrEqualsPlaceholder() SimpleRelation {
+func (c Column) GreaterThanOrEqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= ?", c.String()))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualsString(value string) SimpleRelation {
+func (c Column) GreaterThanOrEqualsString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualsInteger(value int64) SimpleRelation {
+func (c Column) GreaterThanOrEqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= %v", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualsFloat(value float64) SimpleRelation {
+func (c Column) GreaterThanOrEqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v >= %v", c.String(), value))
 }
 
-func (c SelectedColumn) GreaterThanOrEqualsDate(value time.Time) SimpleRelation {
+func (c Column) GreaterThanOrEqualsDate(value time.Time) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("DATE(%v) >= '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // LESS THAN
 
-func (c SelectedColumn) LessThanPlaceholder() SimpleRelation {
+func (c Column) LessThanPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < ?", c.String()))
 }
 
-func (c SelectedColumn) LessThanString(value string) SimpleRelation {
+func (c Column) LessThanString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanInteger(value int64) SimpleRelation {
+func (c Column) LessThanInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < %v", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanFloat(value float64) SimpleRelation {
+func (c Column) LessThanFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v < %v", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanDate(value time.Time) SimpleRelation {
+func (c Column) LessThanDate(value time.Time) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("DATE(%v) < '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // LESS THAN OR EQUAL TO
 
-func (c SelectedColumn) LessThanOrEqualsPlaceholder() SimpleRelation {
+func (c Column) LessThanOrEqualsPlaceholder() SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= ?", c.String()))
 }
 
-func (c SelectedColumn) LessThanOrEqualsString(value string) SimpleRelation {
+func (c Column) LessThanOrEqualsString(value string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= '%v'", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanOrEqualsInteger(value int64) SimpleRelation {
+func (c Column) LessThanOrEqualsInteger(value int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= %v", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanOrEqualsFloat(value float64) SimpleRelation {
+func (c Column) LessThanOrEqualsFloat(value float64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v <= %v", c.String(), value))
 }
 
-func (c SelectedColumn) LessThanOrEqualsDate(value time.Time) SimpleRelation {
+func (c Column) LessThanOrEqualsDate(value time.Time) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("DATE(%v) <= '%v'", c.String(), value.Format("2006-01-02")))
 }
 
 // IN ARRAY
 
-func (c SelectedColumn) InStringArray(values []string) SimpleRelation {
+func (c Column) InStringArray(values []string) SimpleRelation {
 	if len(values) == 0 {
 		return c.IsNull()
 	}
@@ -187,7 +187,7 @@ func (c SelectedColumn) InStringArray(values []string) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v IN (%v)", c.String(), strings.Join(transformedStrings, ", ")))
 }
 
-func (c SelectedColumn) InIntegerArray(values []int64) SimpleRelation {
+func (c Column) InIntegerArray(values []int64) SimpleRelation {
 	if len(values) == 0 {
 		return c.IsNull()
 	}
@@ -203,7 +203,7 @@ func (c SelectedColumn) InIntegerArray(values []int64) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v IN (%v)", c.String(), strings.Join(transformedStrings, ", ")))
 }
 
-func (c SelectedColumn) InFloatArray(values []float64) SimpleRelation {
+func (c Column) InFloatArray(values []float64) SimpleRelation {
 	if len(values) == 0 {
 		return c.IsNull()
 	}
@@ -220,19 +220,23 @@ func (c SelectedColumn) InFloatArray(values []float64) SimpleRelation {
 }
 
 // Sorts
-func (c SelectedColumn) SortAscending() Order {
+func (c Column) SortAscending() Order {
 	return Order{Column: c, Direction: Ascending}
 }
 
-func (c SelectedColumn) SortDescending() Order {
+func (c Column) SortDescending() Order {
 	return Order{Column: c, Direction: Descending}
 }
 
 // Subquery
-func (c SelectedColumn) In(subQuery *Query) SimpleRelation {
+func (c Column) In(subQuery *Query) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v IN (%v)", c.String(), subQuery.ToSQLForSubQuery()))
 }
 
-func (c SelectedColumn) NotIn(subQuery *Query) SimpleRelation {
+func (c Column) NotIn(subQuery *Query) SimpleRelation {
 	return SimpleRelation(fmt.Sprintf("%v NOT IN (%v)", c.String(), subQuery.ToSQLForSubQuery()))
+}
+
+func (c Column) GroupConcat() ColumnFunction {
+	return ColumnFunction{Column: c, Function: "group_concat"}
 }

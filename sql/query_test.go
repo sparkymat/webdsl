@@ -11,7 +11,7 @@ func TestQuery(t *testing.T) {
 	account := Table("account")
 	accountStatus := Table("account_status")
 
-	query := Select(user.AllColumns()).
+	query := Select(user.AllColumns(), account.Column("id").GroupConcat()).
 		From(user).
 		InnerJoin(account.Column("user_id"), user.Column("id")). // InnerJoin() joins on the table in the first arg
 		Where(account.Column("id").In(
@@ -24,7 +24,8 @@ func TestQuery(t *testing.T) {
 
 	expectedSQL := `
 SELECT
-  user.*
+  user.*,
+  group_concat(account.id)
 FROM user 
 INNER JOIN account ON account.user_id = user.id
 WHERE account.id IN (

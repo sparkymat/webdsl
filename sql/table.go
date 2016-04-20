@@ -11,12 +11,12 @@ func Table(name string) table {
 	return table{name: name}
 }
 
-func (t table) AllColumns() SelectedColumn {
-	return SelectedColumn{Table: t, Column: "*"}
+func (t table) AllColumns() Column {
+	return Column{Table: t, Column: "*"}
 }
 
-func (t table) Column(columnName string) SelectedColumn {
-	return SelectedColumn{Table: t, Column: columnName}
+func (t table) Column(columnName string) Column {
+	return Column{Table: t, Column: columnName}
 }
 
 func (t table) Name() string {

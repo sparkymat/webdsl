@@ -6,7 +6,7 @@ import (
 )
 
 type Query struct {
-	SelectedFields []SelectedColumn
+	SelectedFields []SelectedField
 	FromTable      table
 	Joins          []Join
 	WhereRelation  Relation
@@ -15,7 +15,7 @@ type Query struct {
 	count          *string
 }
 
-func Select(fields ...SelectedColumn) *Query {
+func Select(fields ...SelectedField) *Query {
 	query := Query{}
 
 	for _, column := range fields {
@@ -37,21 +37,21 @@ func (q *Query) From(t table) *Query {
 	return q
 }
 
-func (q *Query) InnerJoin(leftColumn SelectedColumn, rightColumn SelectedColumn) *Query {
+func (q *Query) InnerJoin(leftColumn Column, rightColumn Column) *Query {
 	join := Join{Type: "INNER JOIN", LeftColumn: leftColumn, RightColumn: rightColumn}
 	q.Joins = append(q.Joins, join)
 
 	return q
 }
 
-func (q *Query) LeftJoin(leftColumn SelectedColumn, rightColumn SelectedColumn) *Query {
+func (q *Query) LeftJoin(leftColumn Column, rightColumn Column) *Query {
 	join := Join{Type: "LEFT JOIN", LeftColumn: leftColumn, RightColumn: rightColumn}
 	q.Joins = append(q.Joins, join)
 
 	return q
 }
 
-func (q *Query) LeftOuterJoin(leftColumn SelectedColumn, rightColumn SelectedColumn) *Query {
+func (q *Query) LeftOuterJoin(leftColumn Column, rightColumn Column) *Query {
 	join := Join{Type: "LEFT OUTER JOIN", LeftColumn: leftColumn, RightColumn: rightColumn}
 	q.Joins = append(q.Joins, join)
 
@@ -74,10 +74,10 @@ func (q *Query) Where(relation Relation) *Query {
 }
 
 func (q Query) ToSQLForSubQuery() string {
-	selectedColumnStrings := []string{}
+	selectedFieldStrings := []string{}
 
-	for _, selectedColumn := range q.SelectedFields {
-		selectedColumnStrings = append(selectedColumnStrings, fmt.Sprintf("  %v", selectedColumn.SelectionString()))
+	for _, selectedField := range q.SelectedFields {
+		selectedFieldStrings = append(selectedFieldStrings, fmt.Sprintf("  %v", selectedField.SelectionString()))
 	}
 
 	joinStrings := []string{}
@@ -115,7 +115,7 @@ FROM %v %v%v%v%v
 		return fmt.Sprintf(sql, *q.count, q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
 	}
 
-	return fmt.Sprintf(sql, strings.Join(selectedColumnStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
+	return fmt.Sprintf(sql, strings.Join(selectedFieldStrings, ",\n"), q.FromTable.Name(), strings.Join(joinStrings, ""), whereString, orderString, limitString)
 }
 
 func (q Query) ToSQL() string {
