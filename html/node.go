@@ -10,24 +10,31 @@ import (
 type Node struct {
 	Name       string
 	Attributes map[string]string
+	Classes    []css.Class
 	Children   []ChildNode
 }
 
 func (n Node) String() string {
-	var htmlString string
+	htmlString := fmt.Sprintf("<%v", n.Name)
 
-	if n.Attributes == nil || len(n.Attributes) == 0 {
-		htmlString = fmt.Sprintf("<%v>", n.Name)
-	} else {
-		htmlString = fmt.Sprintf("<%v ", n.Name)
+	if len(n.Classes) > 0 {
+		classes := []string{}
+		for _, class := range n.Classes {
+			classes = append(classes, string(class))
+		}
+		classString := strings.Join(classes, " ")
+		htmlString = fmt.Sprintf("%v class=\"%v\"", htmlString, classString)
+	}
 
+	if n.Attributes != nil && len(n.Attributes) > 0 {
 		attributes := []string{}
 		for field, value := range n.Attributes {
-			attributes = append(attributes, fmt.Sprintf("%v=\"%v\"", field, value))
+			attributes = append(attributes, fmt.Sprintf(" %v=\"%v\"", field, value))
 		}
-
-		htmlString = fmt.Sprintf("%v%v>", htmlString, strings.Join(attributes, ""))
+		htmlString = fmt.Sprintf("%v%v", htmlString, strings.Join(attributes, ""))
 	}
+
+	htmlString = fmt.Sprintf("%v>", htmlString)
 
 	for _, child := range n.Children {
 		htmlString = fmt.Sprintf("%v%v", htmlString, child.String())
@@ -51,8 +58,9 @@ func (n *Node) Add(children ...ChildNode) *Node {
 	return n
 }
 
-func (n *Node) Class(class css.Class) *Node {
-	return n.Attr("class", string(class))
+func (n *Node) Class(classes ...css.Class) *Node {
+	n.Classes = classes
+	return n
 }
 
 func (n *Node) Data(key string, value string) *Node {
