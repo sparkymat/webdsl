@@ -1,19 +1,23 @@
 package html
 
-func H1(children ...ChildNode) *Node {
+func H1(children ...*Node) *Node {
 	return &Node{Name: "h1", Children: children}
 }
 
-func P(children ...ChildNode) *Node {
+func P(children ...*Node) *Node {
 	return &Node{Name: "p", Children: children}
 }
 
-func Span(children ...ChildNode) *Node {
+func Span(children ...*Node) *Node {
 	return &Node{Name: "span", Children: children}
 }
 
-func A(children ...ChildNode) *Node {
+func A(children ...*Node) *Node {
 	return &Node{Name: "a", Children: children}
+}
+
+func T(text string) *Node {
+	return &Node{HtmlString: &text}
 }
 
 func LinkTo(title string, href string) *Node {

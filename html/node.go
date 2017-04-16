@@ -11,10 +11,15 @@ type Node struct {
 	Name       string
 	Attributes map[string]string
 	Classes    []css.Class
-	Children   []ChildNode
+	Children   []*Node
+	HtmlString *string
 }
 
 func (n Node) String() string {
+	if n.HtmlString != nil {
+		return *n.HtmlString
+	}
+
 	htmlString := fmt.Sprintf("<%v", n.Name)
 
 	if len(n.Classes) > 0 {
@@ -53,8 +58,13 @@ func (n *Node) Attr(key string, value string) *Node {
 	return n
 }
 
-func (n *Node) Add(children ...ChildNode) *Node {
+func (n *Node) Add(children ...*Node) *Node {
 	n.Children = append(n.Children, children...)
+	return n
+}
+
+func (n *Node) SetChildren(children ...*Node) *Node {
+	n.Children = children
 	return n
 }
 
@@ -65,4 +75,36 @@ func (n *Node) Class(classes ...css.Class) *Node {
 
 func (n *Node) Data(key string, value string) *Node {
 	return n.Attr(fmt.Sprintf("data-%v", key), value)
+}
+
+func (n *Node) Matches(selector css.Selector) bool {
+	class, isClass := selector.(css.Class)
+	if isClass {
+		for _, nodeClass := range n.Classes {
+			if string(nodeClass) == string(class) {
+				return true
+			}
+		}
+	}
+
+	id, isId := selector.(css.Id)
+	if isId && n.Attributes["id"] == string(id) {
+		return true
+	}
+
+	return false
+}
+
+func (n *Node) Select(selector css.Selector) *Node {
+	if n.Matches(selector) {
+		return n
+	}
+
+	for _, childNode := range n.Children {
+		if childNode.Matches(selector) {
+			return childNode
+		}
+	}
+
+	return nil
 }

@@ -1,5 +1,5 @@
 package html
 
-func Div(children ...ChildNode) *Node {
+func Div(children ...*Node) *Node {
 	return &Node{Name: "div", Children: children}
 }

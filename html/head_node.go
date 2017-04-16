@@ -4,6 +4,6 @@ type headNode struct {
 	Node
 }
 
-func Head(children ...ChildNode) headNode {
+func Head(children ...*Node) headNode {
 	return headNode{Node{Name: "head", Children: children}}
 }

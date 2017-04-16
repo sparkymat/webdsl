@@ -31,3 +31,26 @@ func TestHtml(t *testing.T) {
 		t.Error("incorrect")
 	}
 }
+
+func TestSelectSimple(t *testing.T) {
+	a := LinkTo("Test Link", "#").Class(css.Class("primary-link"))
+
+	linkNode := a.Select(css.Class("primary-link"))
+
+	if linkNode == nil {
+		t.Error("Unable to select anchor tag")
+	}
+}
+
+func TestSelectAdvanced(t *testing.T) {
+	p := Div().Class(css.Class("parent"), css.Class("special")).Add(
+		Div().Class(css.Class("child")).Add(
+			LinkTo("Test Link", "#").Class(css.Class("primary-link")),
+		),
+	)
+
+	linkNode := p.Select(css.NestedSelector(css.Class("parent"), css.Class("child"), css.Element("a")))
+	if linkNode == nil {
+		t.Error("Unable to select anchor tag")
+	}
+}
