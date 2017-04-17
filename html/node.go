@@ -10,7 +10,7 @@ import (
 type Node struct {
 	Name       string
 	Attributes map[string]string
-	Classes    []css.Class
+	Classes    map[css.Class]interface{}
 	Children   []*Node
 	HtmlString *string
 }
@@ -22,9 +22,9 @@ func (n Node) String() string {
 
 	htmlString := fmt.Sprintf("<%v", n.Name)
 
-	if len(n.Classes) > 0 {
+	if n.Classes != nil && len(n.Classes) > 0 {
 		classes := []string{}
-		for _, class := range n.Classes {
+		for class, _ := range n.Classes {
 			classes = append(classes, string(class))
 		}
 		classString := strings.Join(classes, " ")
@@ -69,7 +69,16 @@ func (n *Node) SetChildren(children ...*Node) *Node {
 }
 
 func (n *Node) Class(classes ...css.Class) *Node {
-	n.Classes = classes
+	if n.Classes == nil {
+		n.Classes = make(map[css.Class]interface{})
+	}
+	for _, class := range classes {
+		n.Classes[class] = nil
+	}
+	return n
+}
+
+func (n *Node) AddClass(class css.Class) *Node {
 	return n
 }
 
@@ -80,7 +89,7 @@ func (n *Node) Data(key string, value string) *Node {
 func (n *Node) Matches(selector css.Selector, lookRecursively bool) bool {
 	class, isClass := selector.(css.Class)
 	if isClass {
-		for _, nodeClass := range n.Classes {
+		for nodeClass, _ := range n.Classes {
 			if string(nodeClass) == string(class) {
 				return true
 			}
@@ -101,7 +110,7 @@ func (n *Node) Select(selector css.Selector) *Node {
 	}
 
 	for _, childNode := range n.Children {
-		if childNode.Matches(selector) {
+		if childNode.Matches(selector, true) {
 			return childNode
 		}
 	}
