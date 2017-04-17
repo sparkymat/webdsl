@@ -77,7 +77,7 @@ func (n *Node) Data(key string, value string) *Node {
 	return n.Attr(fmt.Sprintf("data-%v", key), value)
 }
 
-func (n *Node) Matches(selector css.Selector) bool {
+func (n *Node) Matches(selector css.Selector, lookRecursively bool) bool {
 	class, isClass := selector.(css.Class)
 	if isClass {
 		for _, nodeClass := range n.Classes {
@@ -96,7 +96,7 @@ func (n *Node) Matches(selector css.Selector) bool {
 }
 
 func (n *Node) Select(selector css.Selector) *Node {
-	if n.Matches(selector) {
+	if n.Matches(selector, true) {
 		return n
 	}
 
