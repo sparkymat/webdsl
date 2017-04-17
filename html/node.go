@@ -79,6 +79,12 @@ func (n *Node) Class(classes ...css.Class) *Node {
 }
 
 func (n *Node) AddClass(class css.Class) *Node {
+	n.Classes[class] = nil
+	return n
+}
+
+func (n *Node) RemoveClass(class css.Class) *Node {
+	delete(n.Classes, class)
 	return n
 }
 

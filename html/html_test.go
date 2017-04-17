@@ -32,6 +32,29 @@ func TestHtml(t *testing.T) {
 	}
 }
 
+func TestCssClasses(t *testing.T) {
+	node := Div().Class(css.Class("first"))
+	expectedString := `<div class="first"></div>`
+
+	if node.String() != expectedString {
+		t.Error("Class() didn't work")
+	}
+
+	node.AddClass(css.Class("second"))
+	expectedString = `<div class="first second"></div>`
+
+	if node.String() != expectedString {
+		t.Error("AddClass() didn't work")
+	}
+
+	node.RemoveClass(css.Class("first"))
+	expectedString = `<div class="second"></div>`
+
+	if node.String() != expectedString {
+		t.Error("RemoveClass() didn't work")
+	}
+}
+
 func TestSelectSimple(t *testing.T) {
 	a := LinkTo("Test Link", "#").Class(css.Class("primary-link"))
 
