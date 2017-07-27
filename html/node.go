@@ -79,11 +79,17 @@ func (n *Node) Class(classes ...css.Class) *Node {
 }
 
 func (n *Node) AddClass(class css.Class) *Node {
+	if n.Classes == nil {
+		n.Classes = make(map[css.Class]interface{})
+	}
 	n.Classes[class] = nil
 	return n
 }
 
 func (n *Node) RemoveClass(class css.Class) *Node {
+	if n.Classes == nil {
+		n.Classes = make(map[css.Class]interface{})
+	}
 	delete(n.Classes, class)
 	return n
 }

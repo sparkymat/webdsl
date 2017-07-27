@@ -25,3 +25,9 @@ func LinkTo(title string, href string) *Node {
 		T(title),
 	)
 }
+
+func Img(src string) *Node {
+	n := Node{Name: "img"}
+	n.Attr("src", src)
+	return &n
+}
