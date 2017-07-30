@@ -9,6 +9,10 @@ const em unit = "em"
 const percent unit = "%"
 const none unit = "none"
 const times unit = "times"
+const vw unit = "vw"
+const vh unit = "vh"
+const vmin unit = "vmin"
+const vmax unit = "vmax"
 
 var Auto = Size{unit: none, stringValue: "auto"}
 
@@ -33,6 +37,22 @@ func Percent(value int64) Size {
 
 func Em(value float64) Size {
 	return Size{floatValue: value, unit: em}
+}
+
+func Vh(value float64) Size {
+	return Size{floatValue: value, unit: vh}
+}
+
+func Vw(value float64) Size {
+	return Size{floatValue: value, unit: vw}
+}
+
+func Vmin(value float64) Size {
+	return Size{floatValue: value, unit: vmin}
+}
+
+func Vmax(value float64) Size {
+	return Size{floatValue: value, unit: vmax}
 }
 
 func (size Size) String() string {

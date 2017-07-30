@@ -3,6 +3,7 @@ package css
 import (
 	"fmt"
 
+	"github.com/sparkymat/webdsl/css/font"
 	"github.com/sparkymat/webdsl/css/size"
 )
 
@@ -20,51 +21,23 @@ func LineHeight(value size.Size) Property {
 	return property
 }
 
-func FontWeight(value uint32) Property {
+func FontWeight(weight font.Weight) Property {
 	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, fmt.Sprintf("%v", value))
+	property.values = append(property.values, weight.String())
 
 	return property
 }
 
-func FontWeightNormal() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "normal")
+func FontStyle(style font.Style) Property {
+	property := Property{propertyType: "font-style"}
+	property.values = append(property.values, style.String())
 
 	return property
 }
 
-func FontWeightBold() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "bold")
-
-	return property
-}
-
-func FontWeightLighter() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "lighter")
-
-	return property
-}
-
-func FontWeightInherit() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "inherit")
-
-	return property
-}
-
-func FontWeightInitial() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "initial")
-
-	return property
-}
-
-func FontWeightBolder() Property {
-	property := Property{propertyType: "font-weight"}
-	property.values = append(property.values, "bolder")
+func Src(url string) Property {
+	property := Property{propertyType: "src"}
+	property.values = append(property.values, url)
 
 	return property
 }
