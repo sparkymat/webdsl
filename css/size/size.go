@@ -59,7 +59,7 @@ func (size Size) String() string {
 	switch size.unit {
 	case px, percent:
 		return fmt.Sprintf("%v%v", size.intValue, size.unit)
-	case em:
+	case em, vh, vw, vmin, vmax:
 		return fmt.Sprintf("%v%v", size.floatValue, size.unit)
 	case times:
 		return fmt.Sprintf("%v", size.floatValue)
